@@ -22,8 +22,7 @@
 	<!-- 引入配置文件 -->
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location"
-			value="classpath:jdbc.properties" />
+		<property name="location" value="classpath:jdbc.properties" />
 	</bean>
 
 	<!-- 数据源定义 -->
@@ -109,6 +108,10 @@
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
 
+	<!-- spring与mybatis整合配置，扫描所有dao -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
+		p:basePackage="com.java.dao" p:sqlSessionFactoryBeanName="sqlSessionFactory" />
+
 	<!-- 配置事务管理器 -->
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -143,7 +146,7 @@
 	<!-- 事务 aop 配置 -->
 	<aop:config>
 		<aop:pointcut id="serviceMethods"
-			expression="execution(* com.sixdi.mjie..*.service..*.* (..))" />
+			expression="execution(* com.java.service..*.* (..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods" />
 	</aop:config>
 
