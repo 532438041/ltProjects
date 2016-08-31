@@ -52,4 +52,10 @@ public class IndexController {
 		PagedResult<User> list = userService.getUserList(pageNo, pageSize);
 		return JSONObject.fromObject(list).toString();
 	}
+	
+	/*@RequestMapping(value = "/user/getUserList")
+	public @ResponseBody Object getUserList(Integer pageNo, Integer pageSize) {
+		PagedResult<User> list = userService.getUserList(pageNo, pageSize);
+		return list;
+	}*/
 }

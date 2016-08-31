@@ -108,10 +108,6 @@
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
 
-	<!-- spring与mybatis整合配置，扫描所有dao -->
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
-		p:basePackage="com.java.dao" p:sqlSessionFactoryBeanName="sqlSessionFactory" />
-
 	<!-- 配置事务管理器 -->
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

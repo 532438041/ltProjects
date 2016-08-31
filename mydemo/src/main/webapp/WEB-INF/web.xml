@@ -16,7 +16,7 @@
 	<!-- Spring 上下文参数 加载Spring配置文件 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:config/applicationContext-mybatis.xml
+		<param-value>classpath:config/applicationContext.xml
 		</param-value>
 	</context-param>
 
