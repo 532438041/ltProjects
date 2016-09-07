@@ -1,0 +1,87 @@
+<!--#include virtual="/header.html" -->
+<div class="content" ms-controller="userList">
+	<div ms-widget="smartgrid, smartgridUserList, $smartgridUserList"></div>
+</div>
+<!--#include virtual="/footer.html" -->
+
+<script type="text/javascript">
+	require([ "smartgrid/avalon.smartgrid" ], function() {
+		var smartgridUserList = avalon.define("userList", function(vm) {
+			vm.$skipArray = [ "smartgrid" ]
+			vm.$smartgridUserList = {
+				columns : [ {
+					key : "id",
+					name : "序号"
+				}, {
+					key : "userName",
+					name : "名称"
+				}, {
+					key : "operate",
+					format : "operate",
+					name : "操作"
+				} ],
+				// 渲染列数据的方法集合
+				htmlHelper : {
+					operate : function(vmId, field, index, cellValue, rowData) {
+						return '<a href="javascript:;" ms-click="showView(\'' + rowData.id + '\')">编辑</a>&nbsp;<a href="javascript:;" ms-click="deleteObj(\'' + rowData.id + '\')">删除</a>';
+					}
+				},
+				//设置分页
+				pageable : true,
+				pager : {
+					onJump : function(e, pagerVM) {
+						showList();
+					},
+					canChangePageSize : true,
+					perPages : 2,
+					options : [ 2, 20, 30, 50, 100 ],
+					dropdown : {
+						onChange : function(newValue, oldValue, vmodel) {
+							avalon.vmodels.smartgridUserList.pager.perPages = newValue;
+							showList();
+						}
+					}
+				}
+			}
+		})
+		avalon.scan();
+		setTimeout(function() {
+			showList();
+		}, 300);
+	})
+
+	function showList() {
+		var gridAVM = avalon.vmodels.smartgridUserList;
+		gridAVM.showLoading();
+
+		var param = {};
+		param.pageNum = avalon.vmodels.smartgridUserList.pager.currentPage;
+		param.pageSize = avalon.vmodels.smartgridUserList.pager.perPages;
+
+		$.ajax({
+			type : "post",
+			dataType : "json",
+			contentType : "application/json",
+			data : JSON.stringify(param),
+			url : "/user/getUserList.json",
+			success : function(dataResult) {
+				var data = dataResult.data.dataList;
+				var totalRecords = dataResult.data.total;
+				if (totalRecords == 0) {
+					gridAVM.noResult = '暂无数据';
+					gridAVM.pageable = false;
+				} else {
+					gridAVM.pageable = true;
+					avalon.vmodels.smartgridUserList.pager.totalItems = totalRecords;
+				}
+				gridAVM.render(data);
+				gridAVM.hideLoading();
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				gridAVM.noResult = '暂无数据';
+				gridAVM.pageable = false;
+				gridAVM.hideLoading();
+			}
+		});
+	}
+</script>

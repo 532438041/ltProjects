@@ -6,26 +6,23 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.github.pagehelper.PageHelper;
 import com.java.common.entity.ImageFileConfig;
-import com.java.common.entity.PagedResult;
-import com.java.common.exception.ExceptionController;
+import com.java.common.entity.PageResult;
 import com.java.dao.ImageDao;
 import com.java.entity.Image;
 import com.java.service.UploadService;
 import com.java.utils.PageUtil;
-import com.java.utils.StringUtil;
-import com.java.utils.UidUtil;
+import com.java.utils.ToolsUtil;
+
+import cn.jiguang.commom.utils.StringUtils;
 
 @Service
 public class UploadServiceImpl implements UploadService {
-
-	private static Logger logger = Logger.getLogger(ExceptionController.class);
 
 	@Autowired
 	private ImageDao imageDao;
@@ -37,7 +34,7 @@ public class UploadServiceImpl implements UploadService {
 		String userId = "1";
 
 		// 图片空间 分组管理
-		if (StringUtil.isNotEmpty(userId)) {
+		if (StringUtils.isNotEmpty(userId)) {
 			path = ImageFileConfig.uploadFilePath + "/" + userId;
 			url = ImageFileConfig.imagePrefix + "/" + userId;
 		} else {
@@ -54,14 +51,13 @@ public class UploadServiceImpl implements UploadService {
 				String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
 				int length = ImageFileConfig.allowSuffix.indexOf(suffix);
 				if (length == -1) {
-					logger.error("请上传允许格式的文件");
 					return;
 				}
 				File destFile = new File(path);
 				if (!destFile.exists()) {
 					destFile.mkdirs();
 				}
-				String fileIdNew = UidUtil.getUUID();
+				String fileIdNew = ToolsUtil.getUUID();
 				String fileNameNew = fileIdNew + "." + suffix;
 				url += "/" + fileNameNew;
 				File f = new File(destFile.getAbsoluteFile() + File.separator + fileNameNew);
@@ -73,7 +69,7 @@ public class UploadServiceImpl implements UploadService {
 				fileNames[index++] = destDir + fileNameNew;
 
 				Image image = new Image();
-				image.setId(UidUtil.getUUID());
+				image.setId(ToolsUtil.getUUID());
 				image.setImgName(file.getOriginalFilename());
 				image.setImgUrl(url);
 				image.setUserId("1");
@@ -84,13 +80,13 @@ public class UploadServiceImpl implements UploadService {
 				imageDao.insert(image);
 			}
 		} catch (Exception ex) {
-			logger.error("Catch Exception: ", ex);
+			
 		}
 	}
 
 	@Override
-	public PagedResult<Image> getImageList(Integer pageNo, Integer pageSize) {
-		PageHelper.startPage(pageNo, pageSize);
+	public PageResult<Image> getImageList(Integer pageNum, Integer pageSize) {
+		PageHelper.startPage(pageNum, pageSize);
 		return PageUtil.toPagedResult(imageDao.getImageList());
 	}
 

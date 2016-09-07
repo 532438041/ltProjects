@@ -2,11 +2,11 @@ package com.java.common.entity;
 
 import java.util.List;
 
-public class PagedResult<T> {
+public class PageResult<T> {
 
 	private List<T> dataList;// 数据
 
-	private long pageNo;// 当前页
+	private long pageNum;// 当前页
 
 	private long pageSize;// 条数
 
@@ -22,12 +22,12 @@ public class PagedResult<T> {
 		this.dataList = dataList;
 	}
 
-	public long getPageNo() {
-		return pageNo;
+	public long getPageNum() {
+		return pageNum;
 	}
 
-	public void setPageNo(long pageNo) {
-		this.pageNo = pageNo;
+	public void setPageNum(long pageNum) {
+		this.pageNum = pageNum;
 	}
 
 	public long getPageSize() {

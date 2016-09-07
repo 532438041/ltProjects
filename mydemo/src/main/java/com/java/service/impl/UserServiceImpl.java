@@ -5,7 +5,8 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.java.base.impl.BaseServiceImpl;
-import com.java.common.entity.PagedResult;
+import com.java.common.entity.PageParam;
+import com.java.common.entity.PageResult;
 import com.java.dao.UserDao;
 import com.java.entity.User;
 import com.java.service.UserService;
@@ -23,8 +24,8 @@ public class UserServiceImpl extends BaseServiceImpl<User>implements UserService
 	}
 
 	@Override
-	public PagedResult<User> getUserList(Integer pageNo, Integer pageSize) {
-		PageHelper.startPage(pageNo, pageSize);
+	public PageResult<User> getUserList(PageParam<User> pageParam) {
+		PageHelper.startPage(pageParam.getPageNum(), pageParam.getPageSize());
 		return PageUtil.toPagedResult(userDao.getUserList());
 	}
 

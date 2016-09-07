@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.java.common.entity.PagedResult;
+import com.java.common.entity.PageResult;
 import com.java.entity.Image;
 import com.java.service.UploadService;
 
@@ -30,8 +30,8 @@ public class UploadController {
 
 	@RequestMapping(value = "/image/getImageList")
 	@ResponseBody
-	public String getImageList(Integer pageNo, Integer pageSize) {
-		PagedResult<Image> list = uploadService.getImageList(pageNo, pageSize);
+	public String getImageList(Integer pageNum, Integer pageSize) {
+		PageResult<Image> list = uploadService.getImageList(pageNum, pageSize);
 		return JSONObject.fromObject(list).toString();
 	}
 

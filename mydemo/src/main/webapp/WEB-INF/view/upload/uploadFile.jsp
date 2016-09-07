@@ -98,7 +98,7 @@
        			type: "post",
        			dataType: "json",
        			data: {
-       				pageNo : avalon.vmodels.smartgridImageList.pager.currentPage,
+       				pageNum : avalon.vmodels.smartgridImageList.pager.currentPage,
        				pageSize : avalon.vmodels.smartgridImageList.pager.perPages
        			},
        			url: "${pageContext.request.contextPath}/image/getImageList",

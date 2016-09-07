@@ -1,18 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans    
                         http://www.springframework.org/schema/beans/spring-beans-4.0.xsd    
                         http://www.springframework.org/schema/context    
                         http://www.springframework.org/schema/context/spring-context-4.0.xsd    
                         http://www.springframework.org/schema/mvc    
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+                        http://www.springframework.org/schema/util
+                        http://www.springframework.org/schema/util/spring-util-3.0.xsd
                         http://www.springframework.org/schema/aop
                         http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 
-	<!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
-	<context:component-scan base-package="com.java.controller" />
+	<!-- 使用Annotation自动注册Bean,扫描@Controller和@ControllerAdvice-->
+	<!-- base-package 如果多个，用“,”分隔 -->
+	<context:component-scan base-package="com.java.controller,com.java.common.exception" use-default-filters="false">  
+       <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/> 
+       <!--控制器增强，使一个Contoller成为全局的异常处理类，类中用@ExceptionHandler方法注解的方法可以处理所有Controller发生的异常-->
+       <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>  
+   </context:component-scan>
 
 	<aop:aspectj-autoproxy />
 
@@ -31,6 +39,7 @@
 
 	<!-- 静态资源映射 -->
 	<mvc:resources mapping="/static/**" location="/WEB-INF/static/" />
+	<mvc:resources mapping="/view/**" location="/WEB-INF/view/" />
 
 	<!-- 启用spring mvc 注解 -->
 	<context:annotation-config />
@@ -57,32 +66,6 @@
 		<property name="prefix" value="/WEB-INF/view/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-
-	<!-- 全局异常配置 start -->
-	<bean
-		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-		<property name="exceptionMappings">
-			<props>
-				<!-- 表示当抛出Exception的时候就返回名叫error/500、404的视图 -->
-				<prop key="java.lang.Exception">error/500</prop>
-				<prop key="java.lang.Throwable">error/404</prop>
-			</props>
-		</property>
-		<!-- 定义在发生异常时视图跟返回码的对应关系 -->
-		<property name="statusCodes">
-			<props>
-				<prop key="error/500">500</prop>
-				<prop key="error/404">404</prop>
-			</props>
-		</property>
-		<!-- 设置日志输出级别，不定义则默认不输出警告等错误日志信息 -->
-		<property name="warnLogCategory" value="WARN"></property>
-		<!-- 默认错误页面，当找不到上面mappings中指定的异常对应视图时，使用本默认配置 -->
-		<property name="defaultErrorView" value="error/404"></property>
-		<!-- 默认HTTP状态码 -->
-		<property name="defaultStatusCode" value="404"></property>
-	</bean>
-	<!-- 全局异常配置 end -->
 
 	<!-- 配置文件上传，如果没有使用文件上传可以不用配置，当然如果不配，那么配置文件中也不必引入上传组件包 -->
 	<bean id="multipartResolver"

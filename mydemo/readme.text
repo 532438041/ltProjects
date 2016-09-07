@@ -1,0 +1,41 @@
+springmvc+restful 提交api
+apache静态化前端 前端暂时用avalon.js 将换成angular.js
+ajax异步前端与api交互
+
+---工具
+maven -
+git -
+
+---框架
+springmvc -
+restful api
+处理全局异常
+基类 -
+结果集基类 -
+公共类 -
+日志 logaop
+测试用例
+
+前端 angular.js bootstrap
+H5
+apache资源静态化
+servlet
+执行器
+项目部署
+分页 -
+图片、文件管理 fastdfs
+权限 shiro
+缓存 redis
+搜索 solr
+下载 
+定时器
+导入 导出
+第三方登录接口
+支付 退款
+
+---数据库
+mybatis
+数据库连接池 druid
+mysql -
+
+

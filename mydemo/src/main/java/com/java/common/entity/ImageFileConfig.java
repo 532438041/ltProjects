@@ -7,10 +7,10 @@ package com.java.common.entity;
  */
 public class ImageFileConfig {
 
-	public static final String allowSuffix  = "jpg,png,gif,jpeg";
-	
+	public static final String allowSuffix = "jpg,png,gif,jpeg";
+
 	/** The Constant uploadFilePath. */
-	public static final String uploadFilePath = "E:/workSpace/springmvc/WebContent/WEB-INF/static/upload/images";
+	public static final String uploadFilePath = "E:/workSpace/ltProjects/mydemo/src/main/webapp/WEB-INF/static/upload/images";
 
 	/** The Constant maxUploadSize. */
 	public static final long maxUploadSize = 4194304;
@@ -19,7 +19,7 @@ public class ImageFileConfig {
 	public static final String imagePrefix = "/static/upload/images";
 
 	/** The Constant imageServer. */
-	public static final String imageServer = "http://localhost:8001/springmvc/";
+	public static final String imageServer = "http://localhost:8001/mydemo/";
 
 	/** The Constant imageCatalog. */
 	public static final String imageCatalog = "img";
