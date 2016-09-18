@@ -9,13 +9,14 @@ import com.java.base.BaseDao;
 
 @Repository
 public class BaseDaoImpl<T> extends SqlSessionDaoSupport implements BaseDao<T> {
+
 	@Autowired
 	public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
 		super.setSqlSessionTemplate(sqlSessionTemplate);
 	}
 
-	public int deleteByPrimaryKey(Long id) {
-		return this.getSqlSession().delete(getStateMentName("deleteByPrimaryKey"), id);
+	public int deleteByPrimaryKey(String key) {
+		return this.getSqlSession().delete(getStateMentName("deleteByPrimaryKey"), key);
 	}
 
 	public String getStateMentName(String methodName) {
@@ -32,8 +33,8 @@ public class BaseDaoImpl<T> extends SqlSessionDaoSupport implements BaseDao<T> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public T selectByPrimaryKey(Long id) {
-		return (T) this.getSqlSession().selectOne(getStateMentName("selectByPrimaryKey"), id);
+	public T selectByPrimaryKey(String key) {
+		return (T) this.getSqlSession().selectOne(getStateMentName("selectByPrimaryKey"), key);
 	}
 
 	public int updateByPrimaryKeySelective(T t) {

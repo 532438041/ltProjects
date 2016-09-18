@@ -1,9 +1,6 @@
 /**
  * 文件上传
  */
-var localObj = window.location;
-var contextPath = localObj.pathname.split("/")[1];
-var basePath = localObj.protocol+"//"+localObj.host+"/"+contextPath;
 
 jQuery(function() {
 	var $ = jQuery,
@@ -24,9 +21,9 @@ jQuery(function() {
 		// 自动上传。
 		auto : false,
 		// swf文件路径
-		swf : basePath + '/webuploader/Uploader.swf',
+		swf : '/static/webuploader/Uploader.swf',
 		// 文件接收服务端。
-		server : basePath + '/uploadFile',
+		server : '/image/uploadFile.json',
 		// 选择文件的按钮。
 		pick : '#filePicker',
 		// 单次上传最多图片数
@@ -58,9 +55,9 @@ jQuery(function() {
 				$li.off().remove();
 				$('#filePicker').children().css('display', '');
 				if ($('#filePicker').attr('class') === 'qyfc_upload webuploader-container') {
-					$('#filePicker').css('background', 'url("../images/chooseImg_qyfc.png") 0 0 no-repeat');
+					$('#filePicker').css('background', 'url("/static/images/chooseImg_qyfc.png") 0 0 no-repeat');
 				} else {
-					$('#filePicker').css('background', 'url("../images/chooseImg_grzp.png") 0 0 no-repeat');
+					$('#filePicker').css('background', 'url("/static/images/chooseImg_grzp.png") 0 0 no-repeat');
 				}
 			});
 			// 创建缩略图
@@ -94,9 +91,9 @@ jQuery(function() {
 			if ($('.file-item').length >= 12) {
 				$('#filePicker').children().css('display', 'none');
 				if ($('#filePicker').attr('class') === 'qyfc_upload webuploader-container') {
-					$('#filePicker').css('background', 'url("../images/chooseImg_qyfcdis.png") 0 0 no-repeat');
+					$('#filePicker').css('background', 'url("/static/images/chooseImg_qyfcdis.png") 0 0 no-repeat');
 				} else {
-					$('#filePicker').css('background', 'url("../images/chooseImg_grzpdis.png") 0 0 no-repeat');
+					$('#filePicker').css('background', 'url("/static/images/chooseImg_grzpdis.png") 0 0 no-repeat');
 				}
 			}
 		}
@@ -142,11 +139,11 @@ jQuery(function() {
 	// 单击开始上传按钮开始上传
 	$upload.on('click', function() {
 		if ($('#fileList').children().length) {
-			$('.uploadBtn').css('background', 'url("../images/uploaderbtndis.png") 0 0 no-repeat');
+			$('.uploadBtn').css('background', 'url("/static/images/uploaderbtndis.png") 0 0 no-repeat');
 			if ($('#filePicker').attr('class') === 'qyfc_upload webuploader-container') {
-				$('#filePicker').css('background', 'url("../images/chooseImg_qyfcdis.png") 0 0 no-repeat');
+				$('#filePicker').css('background', 'url("/static/images/chooseImg_qyfcdis.png") 0 0 no-repeat');
 			} else {
-				$('#filePicker').css('background', 'url("../images/chooseImg_grzpdis.png") 0 0 no-repeat');
+				$('#filePicker').css('background', 'url("/static/images/chooseImg_grzpdis.png") 0 0 no-repeat');
 			}
 			$('#filePicker').children().css('display', 'none');
 			timer = setInterval(function() {
@@ -167,7 +164,7 @@ jQuery(function() {
 
 	// 全部上传完成时触发关闭弹出层
 	uploader.on('uploadFinished', function() {
-		$('.uploadBtn').css('background', 'url("../images/uploaderbtn.png") 0 0 no-repeat');
+		$('.uploadBtn').css('background', 'url("/static/images/uploaderbtn.png") 0 0 no-repeat');
 		clearInterval(timer);
 		closeBtn();
 	});
@@ -226,9 +223,9 @@ jQuery(function() {
 			// 恢复上传框内元素样式
 			$('#filePicker,.uploadBtn,.add_img p,.add_img').removeAttr("style");
 			if ($('#filePicker').attr('class') === 'qyfc_upload webuploader-container') {
-				$('#filePicker').css('background', 'url("../images/chooseImg_qyfc.png") 0 0 no-repeat');
+				$('#filePicker').css('background', 'url("/static/images/chooseImg_qyfc.png") 0 0 no-repeat');
 			} else {
-				$('#filePicker').css('background', 'url("../images/chooseImg_grzp.png") 0 0 no-repeat');
+				$('#filePicker').css('background', 'url("/static/images/chooseImg_grzp.png") 0 0 no-repeat');
 			}
 			$('#filePicker').children().removeAttr("style");
 			$upload.html('开始上传');

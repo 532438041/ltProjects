@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.java.base.BaseDao;
 import com.java.base.BaseService;
+import com.java.utils.ToolsUtil;
 
 @Repository
 public class BaseServiceImpl<T> implements BaseService<T>, ApplicationContextAware {
@@ -26,11 +27,11 @@ public class BaseServiceImpl<T> implements BaseService<T>, ApplicationContextAwa
 		Type genType = this.getClass().getGenericSuperclass();
 		Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
 		this.clazz = (Class<T>) params[0];
-		return (BaseDao<T>) applicationContext.getBean(clazz.getSimpleName() + "Dao");
+		return (BaseDao<T>) applicationContext.getBean(ToolsUtil.uncapFirst(clazz.getSimpleName()) + "DaoImpl");
 	}
 
-	public int deleteByPrimaryKey(Long id) {
-		return getDao().deleteByPrimaryKey(id);
+	public int deleteByPrimaryKey(String key) {
+		return getDao().deleteByPrimaryKey(key);
 	}
 
 	public int insert(T t) {
@@ -41,8 +42,8 @@ public class BaseServiceImpl<T> implements BaseService<T>, ApplicationContextAwa
 		return getDao().insertSelective(t);
 	}
 
-	public T selectByPrimaryKey(Long id) {
-		return getDao().selectByPrimaryKey(id);
+	public T selectByPrimaryKey(String key) {
+		return getDao().selectByPrimaryKey(key);
 
 	}
 

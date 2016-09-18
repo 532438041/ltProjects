@@ -10,7 +10,7 @@ public class ImageFileConfig {
 	public static final String allowSuffix = "jpg,png,gif,jpeg";
 
 	/** The Constant uploadFilePath. */
-	public static final String uploadFilePath = "E:/workSpace/ltProjects/mydemo/src/main/webapp/WEB-INF/static/upload/images";
+	public static final String uploadFilePath = "E:/Service/Tomcat/apache-tomcat-7.0.69/webapps/mydemo/static/upload/images";
 
 	/** The Constant maxUploadSize. */
 	public static final long maxUploadSize = 4194304;
@@ -19,7 +19,7 @@ public class ImageFileConfig {
 	public static final String imagePrefix = "/static/upload/images";
 
 	/** The Constant imageServer. */
-	public static final String imageServer = "http://localhost:8001/mydemo/";
+	public static final String imageServer = "http://localhost/";
 
 	/** The Constant imageCatalog. */
 	public static final String imageCatalog = "img";

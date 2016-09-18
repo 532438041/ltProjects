@@ -3,15 +3,13 @@ package com.java.service.impl;
 import java.io.File;
 import java.util.Date;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.github.pagehelper.PageHelper;
 import com.java.common.entity.ImageFileConfig;
+import com.java.common.entity.PageParam;
 import com.java.common.entity.PageResult;
 import com.java.dao.ImageDao;
 import com.java.entity.Image;
@@ -28,7 +26,7 @@ public class UploadServiceImpl implements UploadService {
 	private ImageDao imageDao;
 
 	@Override
-	public void upload(MultipartFile[] files, String destDir, HttpServletRequest request, HttpServletResponse response) {
+	public void upload(MultipartFile[] files, String destDir) {
 		String path = "";
 		String url = "";
 		String userId = "1";
@@ -80,13 +78,13 @@ public class UploadServiceImpl implements UploadService {
 				imageDao.insert(image);
 			}
 		} catch (Exception ex) {
-			
+
 		}
 	}
 
 	@Override
-	public PageResult<Image> getImageList(Integer pageNum, Integer pageSize) {
-		PageHelper.startPage(pageNum, pageSize);
+	public PageResult<Image> getImageList(PageParam<Image> pageParam) {
+		PageHelper.startPage(pageParam.getPageNum(), pageParam.getPageSize());
 		return PageUtil.toPagedResult(imageDao.getImageList());
 	}
 

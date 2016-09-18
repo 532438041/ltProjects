@@ -40,7 +40,7 @@
 }
 
 #uploader .add_img_head span {
-	background: url("../images/imgHead_grzp.png") 0 0 no-repeat;
+	background: url("/static/images/imgHead_grzp.png") 0 0 no-repeat;
 	position: absolute;
 	display: block;
 	top: 12px;
@@ -50,7 +50,7 @@
 }
 
 #uploader .add_img_head b {
-	background: url("../images/closeImg.png") 0 0 no-repeat;
+	background: url("/static/images/closeImg.png") 0 0 no-repeat;
 	position: absolute;
 	display: block;
 	top: 0;
@@ -87,7 +87,7 @@
 	cursor: pointer;
 	text-align: center;
 	color: #fff;
-	background: url("../images/uploaderbtn.png") 0 0 no-repeat;
+	background: url("/static/images/uploaderbtn.png") 0 0 no-repeat;
 }
 
 #uploader .add_img #filePicker {
@@ -99,7 +99,7 @@
 	margin-left: 86px;
 	position: relative;
 	margin-bottom: 20px;
-	background: url("../images/chooseImg_grzp.png") 0 0 no-repeat;
+	background: url("/static/images/chooseImg_grzp.png") 0 0 no-repeat;
 }
 
 #uploader .add_img #filePicker div {

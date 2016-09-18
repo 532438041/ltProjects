@@ -136,6 +136,6 @@
 	<select id="getUserList" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
-		from sc_user
+		from sc_user order by create_time desc
 	</select>
 </mapper>

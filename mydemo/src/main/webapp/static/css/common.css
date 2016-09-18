@@ -1,0 +1,6 @@
+@CHARSET "UTF-8";
+
+/* 加载avalon 不显示{{}} */
+.ms-controller {
+	visibility: hidden
+}

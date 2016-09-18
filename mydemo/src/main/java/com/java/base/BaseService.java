@@ -4,10 +4,10 @@ public interface BaseService<T> {
 	/**
 	 * 按主键删除实体
 	 * 
-	 * @param id 实体主键
+	 * @param key 实体主键
 	 * @return
 	 */
-	int deleteByPrimaryKey(Long id);
+	int deleteByPrimaryKey(String key);
 
 	/**
 	 * 插入实体
@@ -28,10 +28,10 @@ public interface BaseService<T> {
 	/**
 	 * 通过主键实体查询实体
 	 * 
-	 * @param id 实体
+	 * @param key 实体主键
 	 * @return
 	 */
-	T selectByPrimaryKey(Long id);
+	T selectByPrimaryKey(String key);
 
 	/**
 	 * 选择性更新实体列，若实体的对应字段为空，则忽略该字段
