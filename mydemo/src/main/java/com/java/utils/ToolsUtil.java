@@ -33,6 +33,10 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 
@@ -1361,6 +1365,85 @@ public class ToolsUtil {
 			ss[i] = getUUID();
 		}
 		return ss;
+	}
+
+	/**
+	 * 设置cookie
+	 * 
+	 * @param @param response
+	 * @param @param name
+	 * @param @param value
+	 * @return void
+	 */
+	public static void setCookie(HttpServletResponse response, String name, String value) {
+		try {
+			if (isChinese(value)) {
+				value = URLEncoder.encode(value, "UTF-8");
+			}
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		Cookie cookie = new Cookie(name, value);
+		cookie.setPath("/");
+		cookie.setMaxAge(60 * 60 * 1);// 默认一小时失效
+		response.addCookie(cookie);
+	}
+
+	/**
+	 * 设置cookie
+	 * 
+	 * @param @param response
+	 * @param @param name
+	 * @param @param value
+	 * @param @param maxAge
+	 * @return void
+	 */
+	public static void setCookie(HttpServletResponse response, String name, String value, int maxAge) {
+		try {
+			if (isChinese(value)) {
+				value = URLEncoder.encode(value, "UTF-8");
+			}
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		Cookie cookie = new Cookie(name, value);
+		cookie.setPath("/");
+		if (maxAge > 0) {
+			cookie.setMaxAge(maxAge);
+		}
+		response.addCookie(cookie);
+	}
+
+	/**
+	 * 获取cookie
+	 * 
+	 * @param @param request
+	 * @param @param name
+	 * @param @return
+	 * @return Cookie
+	 */
+	public static String getCookie(HttpServletRequest request, String name) {
+		String value = "";
+		Cookie[] cookies = request.getCookies();
+		if (null != cookies) {
+			for (Cookie cookie : cookies) {
+				if (name.equals(cookie.getName())) {
+					value = cookie.getValue();
+				}
+			}
+		}
+		return value;
+	}
+
+	/**
+	 * 删除指定的Cookie
+	 * 
+	 * @param name
+	 */
+	protected void removeCookie(HttpServletResponse response, String name) {
+		Cookie cookie = new Cookie(name, null);
+		cookie.setMaxAge(0);
+		response.addCookie(cookie);
 	}
 
 }

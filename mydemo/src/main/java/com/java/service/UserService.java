@@ -7,8 +7,10 @@ import com.java.entity.User;
 
 public interface UserService extends BaseService<User>{
 
-	int checkLogin(String userName, String userPwd);
+	User checkLogin(String userName);
 
 	PageResult<User> getUserList(PageParam<User> pageParam);
+
+	String getUserRoleName(String userId);
 	
 }

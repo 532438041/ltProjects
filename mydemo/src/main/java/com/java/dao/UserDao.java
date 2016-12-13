@@ -7,8 +7,10 @@ import com.java.entity.User;
 
 public interface UserDao extends BaseDao<User>{
 
-	int checkLogin(String userName, String userPwd);
+	User checkLogin(String userName);
 
 	List<User> getUserList();
+
+	String getUserRoleName(String userId);
 
 }

@@ -19,14 +19,19 @@ public class UserServiceImpl extends BaseServiceImpl<User>implements UserService
 	private UserDao userDao;
 
 	@Override
-	public int checkLogin(String userName, String userPwd) {
-		return userDao.checkLogin(userName, userPwd);
+	public User checkLogin(String userName) {
+		return userDao.checkLogin(userName);
 	}
 
 	@Override
 	public PageResult<User> getUserList(PageParam<User> pageParam) {
 		PageHelper.startPage(pageParam.getPageNum(), pageParam.getPageSize());
 		return PageUtil.toPagedResult(userDao.getUserList());
+	}
+
+	@Override
+	public String getUserRoleName(String userId) {
+		return userDao.getUserRoleName(userId);
 	}
 
 }

@@ -1,0 +1,63 @@
+<link href="static/css/base/zTreeStyle.css" rel="stylesheet">
+<div class="breadcrumbs">
+	<ul class="breadcrumb mb0">
+		<li>
+	       	<span class="icon-th-large" style="color: #428bca;"></span>
+        	<a href="/">首页</a> 
+            <span class="icon-double-angle-right"></span>
+      	</li>
+      	<li>
+        	<a>系统管理</a>
+            <span class="icon-double-angle-right"></span>
+       	</li>
+      	<li class="active">模块列表</li>
+    </ul>
+</div>
+
+<div class="page-main" ng-controller="menuListController">
+	<form role="form" class="form-inline search-from">
+		<label for="menuUrl">模块编码：</label>
+		<input id="menuUrl" name="menuUrl" type="text" class="form-control">
+		<label for="menuName"class="ml10">模块名称：</label>
+		<input id="menuName" name="menuName" type="text" class="form-control">
+		<input type="button" class="ml10 btn btn-default" value="查询">
+		<input type="button" class="ml10 btn btn-default" value="重置">
+	</form>
+	<div class="operate">
+		<input type="button" class="btn btn-default" value="添加">
+		<input type="button" class="ml10 btn btn-default" value="编辑">
+		<input type="button" class="ml10 btn btn-default" value="删除">
+	</div>
+	<div class="mt10 page-content">
+		<div class="page-left">
+			<ul id="menuTree" class="ztree"></ul>
+		</div>
+		<div class="page-right">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>序号</th>
+						<th>模块编码</th>
+						<th>模块名称</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="tr-nodata" ng-if="menuList.length == 0">
+						<td colspan="4">暂无数据！</td>
+					</tr>
+					<tr ng-repeat="menuData in menuList">
+						<td>{{$index + 1}}</td>
+						<td>{{menuData.menuUrl}}</td>
+						<td>{{menuData.menuName}}</td>
+						<td>
+							<a href="###">编辑</a>
+							<a href="###">删除</a>
+							<a href="###">查看</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
