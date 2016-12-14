@@ -6,4 +6,5 @@
 二、项目使用maven管理jar包。配置方式：
 1、安装maven，修改D:\Java\apache-maven-3.3.9\conf\settings.xml（见附件）
 
-三、
+三、手动加载jar
+1、
