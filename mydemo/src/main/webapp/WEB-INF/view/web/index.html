@@ -5,82 +5,156 @@
     <!-- 确保移动端全屏显示 不能缩放 -->
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
 	<meta name="description" content="angular+bootstrap">
-    <title>angular+bootstrap</title>
-    <!-- bootstrap -->
-	<link href="static/css/base/bootstrap.min.css" rel="stylesheet">
-    <link href="static/css/base/font-awesome.min.css" rel="stylesheet">
-    <link href="static/css/base/bootstrapValidator.min.css" rel="stylesheet">
-    <link href="static/css/base/common.css" rel="stylesheet">
-    <link href="static/css/index.css" rel="stylesheet">
+    <title>列表</title>
+	<link href="/static/css/base/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/base/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/css/base/common.css" rel="stylesheet">
+    <link href="/static/css/web/index.css" rel="stylesheet">
+   	<script src="/static/js/base/angular.min.js"></script>
+    <script src="/static/js/base/jquery-3.1.1.min.js"></script>
+    <script src="/static/js/base/bootstrap.min.js"></script>
+    <script src="/static/js/base/bootstrapValidator.min.js"></script>
+    <script src="/static/js/web/index.js"></script>
 </head>
-
-<body ng-app="indexApp">
+<body ng-app="webIndex" style="background: #f6f6f6;">
 	<div>
-    	<!-- 头部及左侧菜单 -->
-        <div class="navbar navbar-default navbar-static-top navHeader" role="navigation" ng-controller="topController">
-        	<div class="navbar-header navHeaderL">
-            	<a class="navbar-brand" href="/">angular + bootstrap</a>
-            </div>
-            
-            <div class="navbar-header navHeaderR">
-            	<ul class="nav navR">
-                	<li>
-                    	<a href="###">
-                        	<span class="icon-user"></span>
-                        	<span class="red">Hi，{{displayName}}</span>
-                    	</a>
-                    </li>
-                    <li>
-                    	<a href="###">
-                        	<span class="icon-cog"></span>
-                            修改密码
-                      	</a>
-                    </li>
-                    <li>
-                    	<a href="###" ng-click="logout()">
-                        	<span class="icon-signout"></span>
-                        	退出
-                      	</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        
-        <div>
-        	<div class="navbar-default left-menu" role="navigation" ng-controller="menuController">
-            	<div class="left-menu-title">
-                	<span class="icon-home"></span>
-                    工作台
-                </div>
-                <ul class="nav panel-group" id="menuList">
-                    <li class="panel" ng-repeat="topMenu in topMenuList | filter : {pid : '0'}" ng-style="{'border-top' : $index == 0 ? 'none' : ''}">
-                        <a class="pointer" data-target="#collapse{{$index}}" data-toggle="collapse" data-parent="#menuList" ng-click="getIcon($index)">
-                            {{topMenu.menuName}}
-                            <span class="fr" ng-class="{'icon-chevron-down' : topMenu.menuUrl == parentMenuName, 'icon-chevron-right' : topMenu.menuUrl != parentMenuName}"></span>
-                       	</a>
-                        <ul id="collapse{{$index}}" class="nav nav-second-level collapse" ng-class="{'in' : topMenu.menuUrl == parentMenuName}">
-                        	<li ng-repeat="secondMenu in secondMenuList | filter : {pid : topMenu.id}" ui-sref-active="active">
-                        		<a ui-sref="{{secondMenu.menuUrl}}" href="##" ng-click="activeMenu(topMenu.menuUrl, secondMenu.menuUrl)">{{secondMenu.menuName}}</a>
-                        	</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            
-            <div ui-view class="main-content">
-            	
+    	<!-- 留言列表 -->
+        <div class="main-navigation">
+        	<div class="container">
+	        	<ul class="menu">
+	        		<li class="nav-current" role="presentation"><a href="/">首页</a></li>
+				</ul>
             </div>
         </div>
     </div>
-    
-	<script src="static/js/base/angular.min.js"></script>
-	<script src="static/js/base/angular-ui-router.js"></script>
-    <script src="static/js/base/jquery-3.1.1.min.js"></script>
-    <script src="static/js/base/jquery-cookie.js"></script>
-    <script src="static/js/base/bootstrap.min.js"></script>
-    <script src="static/js/base/bootstrapValidator.min.js"></script>
-    <script src="static/js/base/formValidator.js"></script>
-    <script src="static/js/index.js"></script>
-    <script src="static/js/base/ocLazyLoad.min.js"></script>
+    <div class="container" style="width:90%">
+	   	<div class="row">
+			<main class="main-content">
+				<article id="97" class="post">
+					<div class="featured" title="推荐文章">
+						<i class="icon-start-pos icon-star"></i>
+					</div>
+					<div class="post-head">
+						<h4 class="post-title">
+						<a href="/ghost-zhuo-mian-ban-app-geng-xin-neng-gou-tong-shi-guan-li-duo-ge-ghost-bo-ke/">Ghost 桌面版 APP 正式发布，能同时管理多个 Ghost 博客</a>
+						</h4>
+						<div class="post-meta">
+						<span class="author">
+						作者：
+						<a class="text" href="/author/wangsai/">王赛</a>
+						</span>
+						•
+						<time class="post-date" datetime="2016年4月28日星期四上午10点14分" title="2016年4月28日星期四上午10点14分">2016年4月28日</time>
+						</div>
+					</div>
+					<div class="post-content">
+						<p>虽然通过浏览器管理 Ghost 博客虽然很方便，但是在多个 tab 之间切换有时候也会很麻烦，嗯，如果能有一个独立的 app 应该使用起来会更爽一些！ 今天的主角来了，Ghost 桌面版 APP -- Ghost Desktop！ 目前，Ghost Desktop 还处于早期阶段</p>
+					</div>
+					<div class="post-permalink">
+						<a class="btn btn-default" href="/ghost-zhuo-mian-ban-app-geng-xin-neng-gou-tong-shi-guan-li-duo-ge-ghost-bo-ke/">阅读全文</a>
+					</div>
+				</article>
+			</main>
+			<aside class="col-md-4 sidebar"></aside>
+		</div>
+	   	<div class="row">
+			<main class="main-content">
+				<article id="97" class="post">
+					<div class="post-head">
+						<h1 class="post-title">
+						<a href="/ghost-zhuo-mian-ban-app-geng-xin-neng-gou-tong-shi-guan-li-duo-ge-ghost-bo-ke/">Ghost 桌面版 APP 正式发布，能同时管理多个 Ghost 博客</a>
+						</h1>
+						<div class="post-meta">
+						<span class="author">
+						作者：
+						<a class="text" href="/author/wangsai/">王赛</a>
+						</span>
+						•
+						<time class="post-date" datetime="2016年4月28日星期四上午10点14分" title="2016年4月28日星期四上午10点14分">2016年4月28日</time>
+						</div>
+					</div>
+					<div class="post-content">
+						<a href="/ghost-zhuo-mian-ban-app-geng-xin-neng-gou-tong-shi-guan-li-duo-ge-ghost-bo-ke/">
+						<img src="http://static.ghostchina.com/image/4/45/e447fa21190690b28f1957d5937f4.png" width="30%" alt="Ghost 桌面版 APP 正式发布，能同时管理多个 Ghost 博客">
+						</a>
+						<p style="width:68%;float:right;">虽然通过浏览器管理 Ghost 博客虽然很方便，但是在多个 tab 之间切换有时候也会很麻烦，嗯，如果能有一个独立的 app 应该使用起来会更爽一些！ 今天的主角来了，Ghost 桌面版 APP -- Ghost Desktop！ 目前，Ghost Desktop 还处于早期阶段</p>
+					</div>
+					<div class="clear"></div>
+					<div class="post-permalink">
+						<a class="btn btn-default" href="/ghost-zhuo-mian-ban-app-geng-xin-neng-gou-tong-shi-guan-li-duo-ge-ghost-bo-ke/">阅读全文</a>
+					</div>
+				</article>
+			</main>
+			<aside class="col-md-4 sidebar"></aside>
+		</div>
+	   	<div class="row">
+			<main class="main-content">
+				<article id="97" class="post">
+					<div class="post-head">
+						<h1 class="post-title">
+						<a href="/ghost-zhuo-mian-ban-app-geng-xin-neng-gou-tong-shi-guan-li-duo-ge-ghost-bo-ke/">Ghost 桌面版 APP 正式发布，能同时管理多个 Ghost 博客</a>
+						</h1>
+						<div class="post-meta">
+						<span class="author">
+						作者：
+						<a class="text" href="/author/wangsai/">王赛</a>
+						</span>
+						•
+						<time class="post-date" datetime="2016年4月28日星期四上午10点14分" title="2016年4月28日星期四上午10点14分">2016年4月28日</time>
+						</div>
+					</div>
+					<div class="post-content">
+						<p>虽然通过浏览器管理 Ghost 博客虽然很方便，但是在多个 tab 之间切换有时候也会很麻烦，嗯，如果能有一个独立的 app 应该使用起来会更爽一些！ 今天的主角来了，Ghost 桌面版 APP -- Ghost Desktop！ 目前，Ghost Desktop 还处于早期阶段</p>
+					</div>
+					<div class="post-permalink">
+						<a class="btn btn-default" href="/ghost-zhuo-mian-ban-app-geng-xin-neng-gou-tong-shi-guan-li-duo-ge-ghost-bo-ke/">阅读全文</a>
+					</div>
+				</article>
+			</main>
+			<aside class="col-md-4 sidebar"></aside>
+		</div>
+	   	<div class="row">
+			<main class="main-content">
+				<article id="97" class="post">
+					<div class="post-head">
+						<h1 class="post-title">
+						<a href="/ghost-zhuo-mian-ban-app-geng-xin-neng-gou-tong-shi-guan-li-duo-ge-ghost-bo-ke/">Ghost 桌面版 APP 正式发布，能同时管理多个 Ghost 博客</a>
+						</h1>
+						<div class="post-meta">
+						<span class="author">
+						作者：
+						<a class="text" href="/author/wangsai/">王赛</a>
+						</span>
+						•
+						<time class="post-date" datetime="2016年4月28日星期四上午10点14分" title="2016年4月28日星期四上午10点14分">2016年4月28日</time>
+						</div>
+					</div>
+					<div class="post-content">
+						<a href="/ghost-zhuo-mian-ban-app-geng-xin-neng-gou-tong-shi-guan-li-duo-ge-ghost-bo-ke/">
+						<img src="http://static.ghostchina.com/image/4/45/e447fa21190690b28f1957d5937f4.png" width="30%" alt="Ghost 桌面版 APP 正式发布，能同时管理多个 Ghost 博客">
+						</a>
+						<p style="width:68%;float:right;">虽然通过浏览器管理 Ghost 博客虽然很方便，但是在多个 tab 之间切换有时候也会很麻烦，嗯，如果能有一个独立的 app 应该使用起来会更爽一些！ 今天的主角来了，Ghost 桌面版 APP -- Ghost Desktop！ 目前，Ghost Desktop 还处于早期阶段</p>
+					</div>
+					<div class="clear"></div>
+					<div class="post-permalink">
+						<a class="btn btn-default" href="/ghost-zhuo-mian-ban-app-geng-xin-neng-gou-tong-shi-guan-li-duo-ge-ghost-bo-ke/">阅读全文</a>
+					</div>
+				</article>
+			</main>
+			<aside class="col-md-4 sidebar"></aside>
+		</div>
+	</div>
+	<footer class="main-footer">
+		<div class="container" style="text-align: center;">
+			<span>Copyright ©<a href="http://www.ghostchina.com/">Ghost中文网</a></span>
+			|
+			<span><a href="http://www.miibeian.gov.cn/" target="_blank">京ICP备11008151号</a></span>
+			|
+			<span>京公网安备11010802014853</span>
+		</div>
+	</footer>
+	<a id="back-to-top" href="#" style="display: inline;">
+	<i class="fa fa-angle-up"></i>
+	</a>
 </body>
 </html>
