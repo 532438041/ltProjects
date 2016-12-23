@@ -99,7 +99,7 @@ indexApp.controller("menuController", function($scope, $location, $http) {
 
 	$http({
 		method : "get",
-		url : "getMenuTree.json"
+		url : "/menu/getMenuTree.json"
 	}).success(function(dataResult) {
 		$scope.menuList = dataResult.data || [];
 

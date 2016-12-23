@@ -13,12 +13,17 @@ public class MenuDaoImpl extends BaseDaoImpl<Menu>implements MenuDao {
 
 	@Override
 	public List<Menu> getMenuTree(String userId) {
-		return this.getSqlSession().selectList("getMenuTree", userId);
+		return this.getSqlSession().selectList(getStateMentName("getMenuTree"), userId);
 	}
 
 	@Override
 	public List<Menu> getMenuList() {
-		return this.getSqlSession().selectList("getMenuList");
+		return this.getSqlSession().selectList(getStateMentName("getMenuList"));
+	}
+
+	@Override
+	public List<Menu> getMenuByPid(Menu menu) {
+		return this.getSqlSession().selectList(getStateMentName("getMenuByPid"), menu);
 	}
 
 }

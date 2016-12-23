@@ -1,10 +1,6 @@
 package com.java.controller;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,14 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alibaba.fastjson.JSONObject;
 import com.java.common.entity.BaseParam;
 import com.java.common.entity.BaseResult;
 import com.java.common.entity.PageParam;
 import com.java.common.entity.PageResult;
-import com.java.entity.Menu;
 import com.java.entity.User;
-import com.java.service.MenuService;
 import com.java.service.UserService;
 import com.java.utils.ToolsUtil;
 
@@ -28,22 +21,6 @@ public class IndexController {
 
 	@Autowired
 	private UserService userService;
-
-	@Autowired
-	private MenuService menuService;
-
-	@RequestMapping(value = "/getMenuTree")
-	public BaseResult getMenuTree(HttpServletRequest request) {
-		String userId = ToolsUtil.getCookie(request, "userId");
-		String userRoleName = userService.getUserRoleName(userId);
-		BaseResult baseResult = new BaseResult();
-		if (userRoleName.contains("system")) {
-			baseResult.setData(menuService.getMenuList());
-		} else {
-			baseResult.setData(menuService.getMenuTree(userId));
-		}
-		return baseResult.success();
-	}
 
 	@RequestMapping(value = "/user/getUserList")
 	public BaseResult getUserList(@RequestBody PageParam<User> pageParam) {

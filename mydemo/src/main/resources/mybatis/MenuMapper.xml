@@ -174,9 +174,22 @@
 		WHERE user.id = #{userId} AND state = '1' ORDER BY sort
 	</select>
 	<select id="getMenuList" resultMap="BaseResultMap">
-		select
+		SELECT
 		<include refid="Base_Column_List" />
-		from sc_menu
-		where state = '1' ORDER BY sort
+		FROM sc_menu
+		WHERE state = '1' ORDER BY sort
+	</select>
+	<select id="getMenuByPid" resultMap="BaseResultMap" parameterType="com.java.entity.Menu">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM sc_menu
+		WHERE state = '1' AND pid = #{pid} 
+		<if test="menuName != null and menuName != ''">
+			AND menu_name LIKE "%"#{menuName}"%"
+		</if>
+		<if test="menuUrl != null and menuUrl != ''">
+			AND menu_url LIKE "%"#{menuUrl}"%"
+		</if>
+		ORDER BY sort
 	</select>
 </mapper>

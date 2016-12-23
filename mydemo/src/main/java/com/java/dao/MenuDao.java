@@ -11,4 +11,6 @@ public interface MenuDao extends BaseDao<Menu> {
 
 	List<Menu> getMenuList();
 
+	List<Menu> getMenuByPid(Menu menu);
+
 }

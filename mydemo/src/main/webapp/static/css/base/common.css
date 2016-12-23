@@ -72,6 +72,9 @@ a:focus {
 .page-main {
 	padding: 0 10px;
 }
+.page-pager{
+	text-align: center;
+}
 
 .search-from {
 	border-bottom: 1px solid #eee;
