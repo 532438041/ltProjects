@@ -29,7 +29,13 @@
         <table tableName="sc_menu" domainObjectName="Menu" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
         <table tableName="sc_role_menu" domainObjectName="RoleMenu" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
         <table tableName="sc_user_role" domainObjectName="UserRole" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-        <table tableName="sc_user_img" domainObjectName="Image" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table> -->
+        <table tableName="sc_user_img" domainObjectName="Image" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+		<table tableName="web_article" domainObjectName="Article" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        	<columnOverride column="content" javaType="java.lang.String" jdbcType="VARCHAR" />
+        </table>
+        <table tableName="web_article_count" domainObjectName="ArticleCount" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="web_article_log" domainObjectName="ArticleLog" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="web_article_category" domainObjectName="ArticleCategory" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table> -->
     </context>  
     <!-- java -jar D:\Java\liutao\repository\org\mybatis\generator\mybatis-generator-core\1.3.2\mybatis-generator-core-1.3.2.jar -configfile E:\workSpace\ltProjects\mydemo\src\main\resources\generatorConfig.xml -overwrite -->
 </generatorConfiguration>  

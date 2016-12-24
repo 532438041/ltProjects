@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.java.dao.impl.ArticleCountDaoImpl" >
+  <resultMap id="BaseResultMap" type="com.java.entity.ArticleCount" >
+    <id column="id" property="id" jdbcType="CHAR" />
+    <result column="article_id" property="articleId" jdbcType="CHAR" />
+    <result column="reading_count" property="readingCount" jdbcType="INTEGER" />
+    <result column="loving_count" property="lovingCount" jdbcType="INTEGER" />
+    <result column="comment_count" property="commentCount" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, article_id, reading_count, loving_count, comment_count
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from web_article_count
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from web_article_count
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.java.entity.ArticleCount" >
+    insert into web_article_count (id, article_id, reading_count, 
+      loving_count, comment_count)
+    values (#{id,jdbcType=CHAR}, #{articleId,jdbcType=CHAR}, #{readingCount,jdbcType=INTEGER}, 
+      #{lovingCount,jdbcType=INTEGER}, #{commentCount,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.java.entity.ArticleCount" >
+    insert into web_article_count
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="articleId != null" >
+        article_id,
+      </if>
+      <if test="readingCount != null" >
+        reading_count,
+      </if>
+      <if test="lovingCount != null" >
+        loving_count,
+      </if>
+      <if test="commentCount != null" >
+        comment_count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="articleId != null" >
+        #{articleId,jdbcType=CHAR},
+      </if>
+      <if test="readingCount != null" >
+        #{readingCount,jdbcType=INTEGER},
+      </if>
+      <if test="lovingCount != null" >
+        #{lovingCount,jdbcType=INTEGER},
+      </if>
+      <if test="commentCount != null" >
+        #{commentCount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.java.entity.ArticleCount" >
+    update web_article_count
+    <set >
+      <if test="articleId != null" >
+        article_id = #{articleId,jdbcType=CHAR},
+      </if>
+      <if test="readingCount != null" >
+        reading_count = #{readingCount,jdbcType=INTEGER},
+      </if>
+      <if test="lovingCount != null" >
+        loving_count = #{lovingCount,jdbcType=INTEGER},
+      </if>
+      <if test="commentCount != null" >
+        comment_count = #{commentCount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.java.entity.ArticleCount" >
+    update web_article_count
+    set article_id = #{articleId,jdbcType=CHAR},
+      reading_count = #{readingCount,jdbcType=INTEGER},
+      loving_count = #{lovingCount,jdbcType=INTEGER},
+      comment_count = #{commentCount,jdbcType=INTEGER}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

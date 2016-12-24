@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.java.dao.impl.ArticleLogDaoImpl" >
+  <resultMap id="BaseResultMap" type="com.java.entity.ArticleLog" >
+    <id column="id" property="id" jdbcType="CHAR" />
+    <result column="article_id" property="articleId" jdbcType="CHAR" />
+    <result column="user_id" property="userId" jdbcType="CHAR" />
+    <result column="log_type" property="logType" jdbcType="CHAR" />
+    <result column="log_time" property="logTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, article_id, user_id, log_type, log_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from web_article_log
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from web_article_log
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.java.entity.ArticleLog" >
+    insert into web_article_log (id, article_id, user_id, 
+      log_type, log_time)
+    values (#{id,jdbcType=CHAR}, #{articleId,jdbcType=CHAR}, #{userId,jdbcType=CHAR}, 
+      #{logType,jdbcType=CHAR}, #{logTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.java.entity.ArticleLog" >
+    insert into web_article_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="articleId != null" >
+        article_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="logType != null" >
+        log_type,
+      </if>
+      <if test="logTime != null" >
+        log_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="articleId != null" >
+        #{articleId,jdbcType=CHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=CHAR},
+      </if>
+      <if test="logType != null" >
+        #{logType,jdbcType=CHAR},
+      </if>
+      <if test="logTime != null" >
+        #{logTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.java.entity.ArticleLog" >
+    update web_article_log
+    <set >
+      <if test="articleId != null" >
+        article_id = #{articleId,jdbcType=CHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=CHAR},
+      </if>
+      <if test="logType != null" >
+        log_type = #{logType,jdbcType=CHAR},
+      </if>
+      <if test="logTime != null" >
+        log_time = #{logTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.java.entity.ArticleLog" >
+    update web_article_log
+    set article_id = #{articleId,jdbcType=CHAR},
+      user_id = #{userId,jdbcType=CHAR},
+      log_type = #{logType,jdbcType=CHAR},
+      log_time = #{logTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>
