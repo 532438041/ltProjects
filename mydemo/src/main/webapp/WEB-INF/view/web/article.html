@@ -6,27 +6,20 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
 	<meta name="description" content="angular+bootstrap">
     <title>文章详情</title>
-	<link href="/static/css/base/bootstrap.min.css" rel="stylesheet">
+	<link href="/static/css/base/bootstrap.css" rel="stylesheet">
     <link href="/static/css/base/font-awesome.min.css" rel="stylesheet">
     <link href="/static/css/base/common.css" rel="stylesheet">
-    <link href="/static/css/web/index.css" rel="stylesheet">
+    <link href="/static/css/index.css" rel="stylesheet">
    	<script src="/static/js/base/angular.min.js"></script>
     <script src="/static/js/base/jquery-3.1.1.min.js"></script>
     <script src="/static/js/base/bootstrap.min.js"></script>
-    <script src="/static/js/base/bootstrapValidator.min.js"></script>
-    <script src="/static/js/web/index.js"></script>
+    <script src="/static/js/base/bootstrapValidator.js"></script>
+    <script src="/static/js/index.js"></script>
 </head>
 <body ng-app="webIndex" style="background: #f6f6f6;">
-	<div>
-    	<!-- 留言列表 -->
-        <div class="main-navigation">
-        	<div class="container">
-	        	<ul class="menu">
-	        		<li class="nav-current" role="presentation"><a href="/">首页</a></li>
-				</ul>
-            </div>
-        </div>
-    </div>
+
+	<div ng-include="'header'"></div>
+	
     <div class="container" style="width:90%">
 	   	<div class="article">
 			<article id="97" class="post">

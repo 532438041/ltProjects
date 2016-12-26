@@ -9,7 +9,7 @@
 
 var loginApp = angular.module("loginApp", []);
 loginApp.controller("loginController", function($scope, $http) {
-	
+
 	$scope.loginBtn = function() {
 		$('#loginForm').bootstrapValidator('validate');
 		if ($('#loginForm').data('bootstrapValidator').isValid()) {
