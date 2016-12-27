@@ -1,3 +1,9 @@
+@media ( max-width : 767px) {
+	.navbar-default {
+		display: none;
+	}
+}
+
 .navbar-default {
 	background-color: #fff;
 	border-color: #fff;
@@ -7,12 +13,12 @@
 }
 
 .login-page {
-	padding: 70px 70px 20px;
+	margin-top: 70px;
 	text-align: center;
 }
 
 .login-page .logo img {
-	width: 252px;
+	width: 250px;
 }
 
 .login-page .title {
@@ -20,6 +26,7 @@
 	color: #b1b1b1;
 	font-weight: bold;
 	margin: 30px auto;
+	width: 80%;
 }
 
 .login-page .title span {
