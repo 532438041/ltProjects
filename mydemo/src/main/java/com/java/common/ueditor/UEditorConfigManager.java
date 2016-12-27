@@ -1,5 +1,5 @@
 /*** Eclipse Class Decompiler plugin, copyright (c) 2012 Chao Chen (cnfree2000@hotmail.com) ***/
-package com.java.servlet;
+package com.java.common.ueditor;
 
 import java.io.BufferedReader;
 import java.io.File;
