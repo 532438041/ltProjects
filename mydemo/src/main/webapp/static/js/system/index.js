@@ -90,10 +90,10 @@ indexApp.controller("menuController", function($scope, $location, $http) {
 	// 切换菜单右侧箭头
 	$scope.getIcon = function(index) {
 		if ($("#collapse" + index).hasClass("in")) {
-			$("#collapse" + index).prev().find(".fr").removeClass("icon-chevron-down").addClass("icon-chevron-right");
+			$("#collapse" + index).prev().find(".fr").removeClass("fa-chevron-down").addClass("fa-chevron-right");
 		} else {
-			$("#collapse" + index).parent().siblings().find(".fr").removeClass("icon-chevron-down").addClass("icon-chevron-right");
-			$("#collapse" + index).prev().find(".fr").removeClass("icon-chevron-right").addClass("icon-chevron-down");
+			$("#collapse" + index).parent().siblings().find(".fr").removeClass("fa-chevron-down").addClass("fa-chevron-right");
+			$("#collapse" + index).prev().find(".fr").removeClass("fa-chevron-right").addClass("fa-chevron-down");
 		}
 	}
 

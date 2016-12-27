@@ -3,9 +3,9 @@ $(function(){
 	$('form').bootstrapValidator({
 		message: '该字段不能为空！',
 		feedbackIcons: {
-			valid: 'glyphicon glyphicon-ok',
-			invalid: 'glyphicon glyphicon-remove',
-			validating: 'glyphicon glyphicon-refresh'
+			valid: '',
+			invalid: '',
+			validating: ''
 		},
 		fields: {
 			userName: {

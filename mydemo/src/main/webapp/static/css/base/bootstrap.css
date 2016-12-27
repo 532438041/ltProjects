@@ -2545,9 +2545,9 @@ select[multiple].form-group-sm .form-control {
 }
 .input-lg,
 .form-group-lg .form-control {
-  height: 46px;
-  padding: 10px 16px;
-  font-size: 18px;
+  height: 40px;
+  padding: 10px;
+  font-size: 15px;
   line-height: 1.33;
   border-radius: 6px;
 }
@@ -2752,8 +2752,8 @@ select[multiple].form-group-lg .form-control {
   min-height: 27px;
 }
 .form-horizontal .form-group {
-  margin-right: -15px;
-  margin-left: -15px;
+  margin-right: 0px;
+  margin-left: 0px;
 }
 @media (min-width: 768px) {
   .form-horizontal .control-label {
@@ -4029,6 +4029,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   padding-top: 10px;
   padding-bottom: 10px;
   line-height: 20px;
+  outline: medium none;
 }
 @media (max-width: 767px) {
   .navbar-nav .open .dropdown-menu {

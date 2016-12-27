@@ -26,19 +26,19 @@
             	<ul class="nav navR">
                 	<li>
                     	<a href="###">
-                        	<span class="icon-user"></span>
+                        	<span class="fa fa-user"></span>
                         	<span class="red">Hi，{{displayName}}</span>
                     	</a>
                     </li>
                     <li>
                     	<a href="###">
-                        	<span class="icon-cog"></span>
+                        	<span class="fa fa-cog"></span>
                             修改密码
                       	</a>
                     </li>
                     <li>
                     	<a href="###" ng-click="logout()">
-                        	<span class="icon-signout"></span>
+                        	<span class="fa fa-sign-out"></span>
                         	退出
                       	</a>
                     </li>
@@ -49,14 +49,14 @@
         <div>
         	<div class="navbar-default left-menu" role="navigation" ng-controller="menuController">
             	<div class="left-menu-title">
-                	<span class="icon-home"></span>
+                	<span class="fa fa-home"></span>
                     工作台
                 </div>
                 <ul class="nav panel-group" id="menuList">
                     <li class="panel" ng-repeat="topMenu in topMenuList | filter : {pid : '0'}" ng-style="{'border-top' : $index == 0 ? 'none' : ''}">
                         <a class="pointer" data-target="#collapse{{$index}}" data-toggle="collapse" data-parent="#menuList" ng-click="getIcon($index)">
                             {{topMenu.menuName}}
-                            <span class="fr" ng-class="{'icon-chevron-down' : topMenu.menuUrl == parentMenuName, 'icon-chevron-right' : topMenu.menuUrl != parentMenuName}"></span>
+                            <span class="fr fa" ng-class="{'fa-chevron-down' : topMenu.menuUrl == parentMenuName, 'fa-chevron-right' : topMenu.menuUrl != parentMenuName}"></span>
                        	</a>
                         <ul id="collapse{{$index}}" class="nav nav-second-level collapse" ng-class="{'in' : topMenu.menuUrl == parentMenuName}">
                         	<li ng-repeat="secondMenu in secondMenuList | filter : {pid : topMenu.id}" ui-sref-active="active">

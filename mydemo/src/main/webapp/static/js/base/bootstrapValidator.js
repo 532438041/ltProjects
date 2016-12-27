@@ -98,9 +98,9 @@
         //      validating: 'fa fa-refresh'
         //  }
         feedbackIcons: {
-        	valid: 'glyphicon',
-			invalid: 'glyphicon glyphicon-remove',
-			validating: 'glyphicon glyphicon-refresh'
+        	valid: '',
+			invalid: '',
+			validating: ''
         },
 
         // The submit buttons selector
