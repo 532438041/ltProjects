@@ -10,7 +10,7 @@ public class ImageFileConfig {
 	public static final String allowSuffix = "jpg,png,gif,jpeg";
 
 	/** The Constant uploadFilePath. */
-	public static final String uploadFilePath = "E:/Service/Tomcat/apache-tomcat-7.0.69/webapps/mydemo/static/upload/images";
+	public static final String uploadFilePath = "D:/apache-tomcat-7.0.63/webapps/mydemo/static/upload/images";
 
 	/** The Constant maxUploadSize. */
 	public static final long maxUploadSize = 4194304;
