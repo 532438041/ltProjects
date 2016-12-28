@@ -10,8 +10,8 @@ import com.java.entity.Image;
 
 public interface UploadService {
 
-	Map<String, Object> uploadImg(MultipartFile[] files);
-
 	PageResult<Image> getImageList(PageParam<Image> pageParam);
+
+	Map<String, Object> uploadImg(MultipartFile[] files, String userId);
 
 }

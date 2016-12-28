@@ -82,3 +82,9 @@
 	box-shadow: 0 0 10px #eee;
 	font-size: 20px;
 }
+
+.register-msg {
+    color: #9d9d9d;
+    font-size: 12px;
+    line-height: 20px;
+}

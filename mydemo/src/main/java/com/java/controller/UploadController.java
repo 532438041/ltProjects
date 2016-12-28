@@ -3,6 +3,7 @@ package com.java.controller;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,8 +29,8 @@ public class UploadController {
 	}
 
 	@RequestMapping(value = "/image/uploadImg")
-	public BaseResult uploadImg(@RequestParam("file") MultipartFile[] files) {
-		Map<String, Object> map = uploadService.uploadImg(files);
+	public BaseResult uploadImg(@RequestParam("file") MultipartFile[] files, @CookieValue("userId") String userId) {
+		Map<String, Object> map = uploadService.uploadImg(files, userId);
 		return new BaseResult().success(map);
 	}
 

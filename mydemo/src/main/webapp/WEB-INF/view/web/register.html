@@ -1,10 +1,90 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>注册</title>
+	<meta charset="UTF-8">
+	<!-- 确保移动端全屏显示 不能缩放 -->
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+	<meta name="description" content="angular+bootstrap">
+	<title>注册</title>
+	<link href="/static/css/base/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/base/font-awesome.min.css" rel="stylesheet">
+	<link href="/static/css/base/bootstrapValidator.css" rel="stylesheet">
+	<link href="/static/css/base/common.css" rel="stylesheet">
+	<link href="/static/css/web/login.css" rel="stylesheet">
+	<script src="/static/js/base/angular.min.js"></script>
+	<script src="/static/js/base/jquery-3.1.1.min.js"></script>
+	<script src="/static/js/base/bootstrap.min.js"></script>
+	<script src="/static/js/base/bootstrapValidator.js"></script>
+	<script src="/static/js/base/formValidator.js"></script>
+	<script src="/static/js/base/common.js"></script>
+	<script src="/static/js/base/dialog.js"></script>
+	<script src="/static/js/web/register.js"></script>
 </head>
-<body>
-
+<body ng-app="registerApp">
+	<div class="navbar navbar-default" role="navigation">
+		<ul class="nav navbar-nav navbar-right">
+			<li>
+				<a href="/login"><span class="fa fa-sign-in"></span> 登录</a>
+			</li>
+			<li>
+				<a href="/register"><span class="fa fa-user"></span> 注册</a>
+			</li>
+		</ul>
+	</div>
+	<div class="container" ng-controller="registerController">
+		<div class="login-page">
+			<div class="logo">
+				<img src="/static/images/img_logo.png">
+			</div>
+			<h4 class="title">
+				<span>
+					<a href="/login">登录</a>
+					<b>·</b>
+					<a class="active" href="/register">注册</a>
+				</span>
+			</h4>
+			<div class="register-form">
+				<form role="form" class="form-horizontal" id="registerForm">
+					<div class="form-group">
+						<div class="input-group">
+							<div class="input-group-addon">
+								<span class="fa fa-user fa-lg fa-fw"></span>
+							</div>
+							<input type="text" name="userName" class="form-control input-lg" autocomplete="off" placeholder="用户名/手机号/邮箱" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="input-group">
+							<div class="input-group-addon">
+								<span class="fa fa-lock fa-lg fa-fw"></span>
+							</div>
+							<input type="password" name="userPwd" class="form-control input-lg" placeholder="密码" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<input type="button" class="btn btn-primary btn-block" value="注 册" ng-click="registerBtn()">
+					</div>
+					<div class="text-left">
+						<p class="register-msg">点击 “注册” 或下方社交登录按钮，即表示您同意并愿意遵守简书 
+						<a href="###"><strong>用户协议</strong></a> 和 <a href="###"><strong>隐私政策</strong></a> 。</p>
+					</div>
+				</form>
+			</div>
+			<div class="third-login">
+				<p>您还可以通过以下方式直接登录</p>
+				<ul class="list-inline">
+					<li>
+						<a href="###"><i class="fa fa-qq"></i></a>
+					</li>
+					<li>
+						<a href="###"><i class="fa fa-weixin"></i></a>
+					</li>
+					<li>
+						<a href="###"><i class="fa fa-weibo"></i></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

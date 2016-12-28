@@ -27,10 +27,9 @@ public class UploadServiceImpl implements UploadService {
 	private ImageDao imageDao;
 
 	@Override
-	public Map<String, Object> uploadImg(MultipartFile[] files) {
+	public Map<String, Object> uploadImg(MultipartFile[] files, String userId) {
 		String path = "";
 		String url = "";
-		String userId = "1";
 
 		Map<String, Object> map = new HashMap<>();
 
