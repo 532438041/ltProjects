@@ -10,7 +10,6 @@ import com.baidu.ueditor.define.BaseState;
 import com.baidu.ueditor.define.State;
 import com.baidu.ueditor.hunter.FileManager;
 import com.baidu.ueditor.hunter.ImageHunter;
-import com.baidu.ueditor.upload.Uploader;
 
 public class UEditorActionEnter {
 	private HttpServletRequest request = null;
@@ -67,7 +66,7 @@ public class UEditorActionEnter {
 		case 3:
 		case 4:
 			conf = this.configManager.getConfig(actionCode);
-			state = new Uploader(this.request, conf).doExec();
+			state = new UEditorUploader(this.request, conf).doExec();
 			break;
 		case 5:
 			conf = this.configManager.getConfig(actionCode);

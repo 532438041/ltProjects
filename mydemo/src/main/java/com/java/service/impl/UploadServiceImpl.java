@@ -1,7 +1,8 @@
 package com.java.service.impl;
 
 import java.io.File;
-import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,10 +27,12 @@ public class UploadServiceImpl implements UploadService {
 	private ImageDao imageDao;
 
 	@Override
-	public void upload(MultipartFile[] files, String destDir) {
+	public Map<String, Object> uploadImg(MultipartFile[] files) {
 		String path = "";
 		String url = "";
 		String userId = "1";
+
+		Map<String, Object> map = new HashMap<>();
 
 		// 图片空间 分组管理
 		if (StringUtils.isNotEmpty(userId)) {
@@ -42,14 +45,12 @@ public class UploadServiceImpl implements UploadService {
 
 		// 获取文件上传的真实路径
 		try {
-			String[] fileNames = new String[files.length];
-			int index = 0;
 			// 上传文件过程
 			for (MultipartFile file : files) {
 				String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
 				int length = ImageFileConfig.allowSuffix.indexOf(suffix);
 				if (length == -1) {
-					return;
+					return null;
 				}
 				File destFile = new File(path);
 				if (!destFile.exists()) {
@@ -64,22 +65,15 @@ public class UploadServiceImpl implements UploadService {
 				}
 				file.transferTo(f);
 				f.createNewFile();
-				fileNames[index++] = destDir + fileNameNew;
 
-				Image image = new Image();
-				image.setId(ToolsUtil.getUUID());
-				image.setImgName(file.getOriginalFilename());
-				image.setImgUrl(url);
-				image.setUserId("1");
-				image.setCreateBy("1");
-				image.setCreateTime(new Date());
-				image.setUpdateBy("1");
-				image.setUpdateTime(new Date());
-				imageDao.insert(image);
+				map.put("imgName", file.getOriginalFilename());
+				map.put("imgUrl", url);
+
 			}
 		} catch (Exception ex) {
 
 		}
+		return map;
 	}
 
 	@Override

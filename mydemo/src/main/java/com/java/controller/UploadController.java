@@ -1,5 +1,7 @@
 package com.java.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,9 +27,10 @@ public class UploadController {
 		return new BaseResult().success(list);
 	}
 
-	@RequestMapping(value = "/image/uploadFile")
-	public void upload(@RequestParam("file") MultipartFile[] files, String destDir) {
-		uploadService.upload(files, destDir);
+	@RequestMapping(value = "/image/uploadImg")
+	public BaseResult uploadImg(@RequestParam("file") MultipartFile[] files) {
+		Map<String, Object> map = uploadService.uploadImg(files);
+		return new BaseResult().success(map);
 	}
 
 }
