@@ -31,6 +31,8 @@ public class Article {
 
     private String checkTime;
 
+    private String isRecommend;
+
     public String getId() {
         return id;
     }
@@ -141,5 +143,13 @@ public class Article {
 
     public void setCheckTime(String checkTime) {
         this.checkTime = checkTime;
+    }
+
+    public String getIsRecommend() {
+        return isRecommend;
+    }
+
+    public void setIsRecommend(String isRecommend) {
+        this.isRecommend = isRecommend;
     }
 }

@@ -1,199 +1,217 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.java.dao.impl.ArticleDaoImpl" >
-  <resultMap id="BaseResultMap" type="com.java.entity.Article" >
-    <id column="id" property="id" jdbcType="CHAR" />
-    <result column="title" property="title" jdbcType="VARCHAR" />
-    <result column="subtitle" property="subtitle" jdbcType="VARCHAR" />
-    <result column="content" property="content" jdbcType="VARCHAR" />
-    <result column="picture" property="picture" jdbcType="VARCHAR" />
-    <result column="user_id" property="userId" jdbcType="CHAR" />
-    <result column="cate_id" property="cateId" jdbcType="CHAR" />
-    <result column="state" property="state" jdbcType="CHAR" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="publish_time" property="publishTime" jdbcType="TIMESTAMP" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-    <result column="check_reason" property="checkReason" jdbcType="VARCHAR" />
-    <result column="check_by" property="checkBy" jdbcType="CHAR" />
-    <result column="check_time" property="checkTime" jdbcType="CHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, title, subtitle, content, picture, user_id, cate_id, state, create_time, publish_time, 
-    update_time, check_reason, check_by, check_time
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    from web_article
-    where id = #{id,jdbcType=CHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from web_article
-    where id = #{id,jdbcType=CHAR}
-  </delete>
-  <insert id="insert" parameterType="com.java.entity.Article" >
-    insert into web_article (id, title, subtitle, 
-      content, picture, user_id, 
-      cate_id, state, create_time, 
-      publish_time, update_time, check_reason, 
-      check_by, check_time)
-    values (#{id,jdbcType=CHAR}, #{title,jdbcType=VARCHAR}, #{subtitle,jdbcType=VARCHAR}, 
-      #{content,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, #{userId,jdbcType=CHAR}, 
-      #{cateId,jdbcType=CHAR}, #{state,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{publishTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{checkReason,jdbcType=VARCHAR}, 
-      #{checkBy,jdbcType=CHAR}, #{checkTime,jdbcType=CHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.java.entity.Article" >
-    insert into web_article
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="title != null" >
-        title,
-      </if>
-      <if test="subtitle != null" >
-        subtitle,
-      </if>
-      <if test="content != null" >
-        content,
-      </if>
-      <if test="picture != null" >
-        picture,
-      </if>
-      <if test="userId != null" >
-        user_id,
-      </if>
-      <if test="cateId != null" >
-        cate_id,
-      </if>
-      <if test="state != null" >
-        state,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="publishTime != null" >
-        publish_time,
-      </if>
-      <if test="updateTime != null" >
-        update_time,
-      </if>
-      <if test="checkReason != null" >
-        check_reason,
-      </if>
-      <if test="checkBy != null" >
-        check_by,
-      </if>
-      <if test="checkTime != null" >
-        check_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=CHAR},
-      </if>
-      <if test="title != null" >
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="subtitle != null" >
-        #{subtitle,jdbcType=VARCHAR},
-      </if>
-      <if test="content != null" >
-        #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="picture != null" >
-        #{picture,jdbcType=VARCHAR},
-      </if>
-      <if test="userId != null" >
-        #{userId,jdbcType=CHAR},
-      </if>
-      <if test="cateId != null" >
-        #{cateId,jdbcType=CHAR},
-      </if>
-      <if test="state != null" >
-        #{state,jdbcType=CHAR},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="publishTime != null" >
-        #{publishTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="checkReason != null" >
-        #{checkReason,jdbcType=VARCHAR},
-      </if>
-      <if test="checkBy != null" >
-        #{checkBy,jdbcType=CHAR},
-      </if>
-      <if test="checkTime != null" >
-        #{checkTime,jdbcType=CHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.java.entity.Article" >
-    update web_article
-    <set >
-      <if test="title != null" >
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="subtitle != null" >
-        subtitle = #{subtitle,jdbcType=VARCHAR},
-      </if>
-      <if test="content != null" >
-        content = #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="picture != null" >
-        picture = #{picture,jdbcType=VARCHAR},
-      </if>
-      <if test="userId != null" >
-        user_id = #{userId,jdbcType=CHAR},
-      </if>
-      <if test="cateId != null" >
-        cate_id = #{cateId,jdbcType=CHAR},
-      </if>
-      <if test="state != null" >
-        state = #{state,jdbcType=CHAR},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="publishTime != null" >
-        publish_time = #{publishTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="checkReason != null" >
-        check_reason = #{checkReason,jdbcType=VARCHAR},
-      </if>
-      <if test="checkBy != null" >
-        check_by = #{checkBy,jdbcType=CHAR},
-      </if>
-      <if test="checkTime != null" >
-        check_time = #{checkTime,jdbcType=CHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=CHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.java.entity.Article" >
-    update web_article
-    set title = #{title,jdbcType=VARCHAR},
-      subtitle = #{subtitle,jdbcType=VARCHAR},
-      content = #{content,jdbcType=VARCHAR},
-      picture = #{picture,jdbcType=VARCHAR},
-      user_id = #{userId,jdbcType=CHAR},
-      cate_id = #{cateId,jdbcType=CHAR},
-      state = #{state,jdbcType=CHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      publish_time = #{publishTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      check_reason = #{checkReason,jdbcType=VARCHAR},
-      check_by = #{checkBy,jdbcType=CHAR},
-      check_time = #{checkTime,jdbcType=CHAR}
-    where id = #{id,jdbcType=CHAR}
-  </update>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.dao.impl.ArticleDaoImpl">
+	<resultMap id="BaseResultMap" type="com.java.entity.Article">
+		<id column="id" jdbcType="CHAR" property="id" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="subtitle" jdbcType="VARCHAR" property="subtitle" />
+		<result column="content" jdbcType="VARCHAR" property="content" />
+		<result column="picture" jdbcType="VARCHAR" property="picture" />
+		<result column="user_id" jdbcType="CHAR" property="userId" />
+		<result column="cate_id" jdbcType="CHAR" property="cateId" />
+		<result column="state" jdbcType="CHAR" property="state" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="publish_time" jdbcType="TIMESTAMP" property="publishTime" />
+		<result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+		<result column="check_reason" jdbcType="VARCHAR" property="checkReason" />
+		<result column="check_by" jdbcType="CHAR" property="checkBy" />
+		<result column="check_time" jdbcType="CHAR" property="checkTime" />
+		<result column="is_recommend" jdbcType="CHAR" property="isRecommend" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, title, subtitle, content, picture, user_id, cate_id, state,
+		create_time, publish_time,
+		update_time, check_reason, check_by, check_time, is_recommend
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from web_article
+		where id = #{id,jdbcType=CHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from web_article
+		where id = #{id,jdbcType=CHAR}
+	</delete>
+	<insert id="insert" parameterType="com.java.entity.Article">
+		insert into web_article (id, title, subtitle,
+		content, picture, user_id,
+		cate_id, state, create_time,
+		publish_time, update_time, check_reason,
+		check_by, check_time, is_recommend
+		)
+		values (#{id,jdbcType=CHAR}, #{title,jdbcType=VARCHAR},
+		#{subtitle,jdbcType=VARCHAR},
+		#{content,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, #{userId,jdbcType=CHAR},
+		#{cateId,jdbcType=CHAR}, #{state,jdbcType=CHAR},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{publishTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{checkReason,jdbcType=VARCHAR},
+		#{checkBy,jdbcType=CHAR}, #{checkTime,jdbcType=CHAR},
+		#{isRecommend,jdbcType=CHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.java.entity.Article">
+		insert into web_article
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+			<if test="subtitle != null">
+				subtitle,
+			</if>
+			<if test="content != null">
+				content,
+			</if>
+			<if test="picture != null">
+				picture,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="cateId != null">
+				cate_id,
+			</if>
+			<if test="state != null">
+				state,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="publishTime != null">
+				publish_time,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+			<if test="checkReason != null">
+				check_reason,
+			</if>
+			<if test="checkBy != null">
+				check_by,
+			</if>
+			<if test="checkTime != null">
+				check_time,
+			</if>
+			<if test="isRecommend != null">
+				is_recommend,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=CHAR},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="subtitle != null">
+				#{subtitle,jdbcType=VARCHAR},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=VARCHAR},
+			</if>
+			<if test="picture != null">
+				#{picture,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=CHAR},
+			</if>
+			<if test="cateId != null">
+				#{cateId,jdbcType=CHAR},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=CHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="publishTime != null">
+				#{publishTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="checkReason != null">
+				#{checkReason,jdbcType=VARCHAR},
+			</if>
+			<if test="checkBy != null">
+				#{checkBy,jdbcType=CHAR},
+			</if>
+			<if test="checkTime != null">
+				#{checkTime,jdbcType=CHAR},
+			</if>
+			<if test="isRecommend != null">
+				#{isRecommend,jdbcType=CHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.java.entity.Article">
+		update web_article
+		<set>
+			<if test="title != null">
+				title = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="subtitle != null">
+				subtitle = #{subtitle,jdbcType=VARCHAR},
+			</if>
+			<if test="content != null">
+				content = #{content,jdbcType=VARCHAR},
+			</if>
+			<if test="picture != null">
+				picture = #{picture,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=CHAR},
+			</if>
+			<if test="cateId != null">
+				cate_id = #{cateId,jdbcType=CHAR},
+			</if>
+			<if test="state != null">
+				state = #{state,jdbcType=CHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="publishTime != null">
+				publish_time = #{publishTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="checkReason != null">
+				check_reason = #{checkReason,jdbcType=VARCHAR},
+			</if>
+			<if test="checkBy != null">
+				check_by = #{checkBy,jdbcType=CHAR},
+			</if>
+			<if test="checkTime != null">
+				check_time = #{checkTime,jdbcType=CHAR},
+			</if>
+			<if test="isRecommend != null">
+				is_recommend = #{isRecommend,jdbcType=CHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=CHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.java.entity.Article">
+		update web_article
+		set title = #{title,jdbcType=VARCHAR},
+		subtitle = #{subtitle,jdbcType=VARCHAR},
+		content = #{content,jdbcType=VARCHAR},
+		picture = #{picture,jdbcType=VARCHAR},
+		user_id = #{userId,jdbcType=CHAR},
+		cate_id = #{cateId,jdbcType=CHAR},
+		state = #{state,jdbcType=CHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		publish_time = #{publishTime,jdbcType=TIMESTAMP},
+		update_time = #{updateTime,jdbcType=TIMESTAMP},
+		check_reason = #{checkReason,jdbcType=VARCHAR},
+		check_by = #{checkBy,jdbcType=CHAR},
+		check_time = #{checkTime,jdbcType=CHAR},
+		is_recommend = #{isRecommend,jdbcType=CHAR}
+		where id = #{id,jdbcType=CHAR}
+	</update>
 </mapper>
