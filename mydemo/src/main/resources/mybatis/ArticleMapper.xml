@@ -214,4 +214,12 @@
 		is_recommend = #{isRecommend,jdbcType=CHAR}
 		where id = #{id,jdbcType=CHAR}
 	</update>
+	<select id="getArticleList" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from web_article order by create_time desc
+	</select>
+	<select id="getArticleById" parameterType="java.lang.String" resultType="com.java.entity.Article">
+	  SELECT <include refid="Base_Column_List" /> from web_article where ID = #{id}
+	 </select>
 </mapper>

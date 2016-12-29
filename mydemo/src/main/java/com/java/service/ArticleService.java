@@ -8,4 +8,6 @@ import com.java.entity.Article;
 public interface ArticleService extends BaseService<Article>{
 
 	PageResult<Article> getArticleList(PageParam<Article> pageParam);
+	
+	Article getArticle(String id);
 }

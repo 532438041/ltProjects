@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <!-- 确保移动端全屏显示 不能缩放 -->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+	<meta name="description" content="angular+bootstrap">
+    <title>用户页面</title>
+	<link href="/static/css/base/bootstrap.css" rel="stylesheet">
+    <link href="/static/css/base/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/css/index.css" rel="stylesheet">
+    <link href="/static/css/index.css" rel="stylesheet">
+    <script type="text/javascript" charset="utf-8" src="/static/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/static/ueditor/ueditor.all.min.js"> </script>
+    <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+    <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+    <script type="text/javascript" charset="utf-8" src="/static/ueditor/lang/zh-cn/zh-cn.js"></script>
+</head>
+<body ng-app="addArticle">
+	<!-- 公共头部导航 start -->
+	<div ng-include="'../header'"></div>
+	<!-- 公共头部导航 end -->
+   	<div class="container" style="width: 100%">
+	   	<!-- 用户左边 start -->
+		<div ng-include="'userLeft'"></div>
+		<!-- 用户左边 end -->
+	    <div style="width:60%;width:65%;float: right;margin-right: 15px;" class="post" ng-controller="addArticleAppController" >
+			<form class="form-horizontal" role="form" id="addArticleForm">
+				<div class="form-group">
+					<label for="firstname" class="col-sm-2 control-label"><span class="red">*</span>文章标题</label>
+					<div class="col-sm-9">
+					  <input type="text" class="form-control" name="title" placeholder="标题" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="firstname" class="col-sm-2 control-label"><span class="red">*</span>副标题/简介</label>
+					<div class="col-sm-9">
+					  <textarea type="text" class="form-control" name="subtitle" placeholder="副标题/简介" required></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="inputfile">文章主图</label>
+					<div class="col-sm-9">
+					<input type="file" name="picture">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="inputfile"><span class="red">*</span>文章标签</label>
+					<div class="col-sm-9 widget" style="margin: 0px">
+						<div class="content tag-cloud">
+							<input type="hidden" name="articleCateId" required>
+							<a  ng-repeat="articleCate in articleCateList" href="" id="{{articleCate.id}}">{{articleCate.cateName}}</a>
+						</div>
+					</div>
+				</div>
+				<div class="form-group" >
+					<label class="col-sm-2 control-label" for="inputfile"><span class="red">*</span>文章内容</label>
+				</div>
+				<div class="form-group" >
+					<script id="editor" type="text/plain" style="height:300px;"></script>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-6">
+					  <button type="submit" ng-click="articleSubmit()" class="btn btn-default">发布</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!-- 公共底部导航 start -->
+	<div ng-include="'../footer'"></div>
+	<!-- 公共底部导航 end -->
+	<script src="/static/js/base/jquery-3.1.1.min.js"></script>
+   	<script src="/static/js/base/angular.min.js"></script>
+    <script src="/static/js/base/bootstrap.min.js"></script>
+    <script src="/static/js/base/bootstrapValidator.js"></script>
+    <script src="/static/js/base/jquery-cookie.js"></script>
+    <script src="/static/js/base/jquery.Query.js"></script>
+    <script src="/static/js/base/bootstrapValidator.js"></script>
+	<script src="/static/js/base/formValidator.js"></script>
+    <script src="/static/js/main.js"></script>
+	<script type="text/javascript">
+		var addArticleApp = angular.module("addArticle",[]);
+		addArticleApp.controller("addArticleAppController", function($scope, $http) {
+			$http({
+				method : "post",
+				url : "/user/articleCate.json",
+				data:{}
+			}).success(function(dataResult) {
+				var result =  dataResult.data.dataList;
+				$scope.articleCateList = result;
+			});
+			//提交文章信息
+			$scope.articleSubmit = function(){
+				alert("sfdsd");
+				$('#addArticleForm').bootstrapValidator('validate');
+				if ($('#addArticleForm').data('bootstrapValidator').isValid()) {
+					var param = $("#addArticleForm").serializeJson();
+					alert(param);
+				}
+			}
+		});
+	    //实例化编辑器
+	    //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+	    var ue = UE.getEditor('editor');
+	    
+	</script>
+</body>
+</html>

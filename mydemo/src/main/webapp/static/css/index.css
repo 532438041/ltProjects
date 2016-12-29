@@ -12,7 +12,7 @@ html,
 body {
   color: #505050;
   line-height: 1.75em;
-  background: #ebebeb;
+  background: #f6f6f6;
   position: relative;
   font-family: "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "Hiragino Sans GB W3", "WenQuanYi Micro Hei", "Microsoft YaHei UI", "Microsoft YaHei", sans-serif;
 }
@@ -54,6 +54,12 @@ a:active,
 a:focus,
 a img {
   outline: none;
+}
+.red{
+	color: red;
+}
+.row{
+	margin: 0px;
 }
 .clear{clear: both;}
 .btn {
@@ -161,6 +167,9 @@ pre {
   margin-bottom: 35px;
   border-bottom: 2px solid #e1e1e1;
 }
+.main-navigation .login{float: right;top: 18px;right: 10px;position: absolute;}
+.main-navigation a{color: #505050;margin-left:5px;}
+.main-navigation a:hover{color: #e67e22;text-decoration: none;}
 .main-navigation .menu {
   padding: 0;
   margin: 0;
@@ -169,7 +178,6 @@ pre {
   list-style: none;
   display: inline-block;
   position: relative;
-  text-align: center;
 }
 .main-navigation .menu li.nav-current {
   border-bottom: 2px solid #e67e22;
@@ -224,7 +232,7 @@ pre {
     text-align: left;
   }
   .main-navigation .menu li {
-    display: inline-block;
+    display: block;
   }
   .main-navigation .menu li:hover > a {
     color: #e67e22;
@@ -685,6 +693,8 @@ pre {
 .sidebar .widget {
   background: #ffffff;
   padding: 21px 30px;
+  box-shadow:0 0 15px rgba(0, 0, 0, 0.2);
+  
 }
 .main-footer .widget {
   padding: 0px 30px;
@@ -883,16 +893,19 @@ pre {
   border-radius: 2px;
   z-index: 1;
   display: none;
+  width:30px;
+  text-decoration: none;
 }
 #back-to-top:hover {
   background: #e67e22;
+  text-decoration: none;
 }
 #back-to-top i {
   width: 30px;
   height: 30px;
   line-height: 30px;
 }
-.icon-start-pos {
+.fa-start-pos {
 	display: inline-block;
     font-family: FontAwesome;
     font-feature-settings: normal;

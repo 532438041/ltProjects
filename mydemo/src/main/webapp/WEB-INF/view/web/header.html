@@ -1,8 +1,29 @@
-
+<!-- 公共头部导航 start -->
 <div class="main-navigation">
-	<div class="container">
-		<ul class="menu">
-			<li class="nav-current" role="presentation"><a href="/">首页</a></li>
-		</ul>
-	</div>
+	<div class="row" >
+		<div class="col-sm-12">
+			<div class="navbar-header">
+				<span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu">
+				<span class="sr-only">Toggle navigation</span>
+					<i class="fa fa-align-justify"></i>
+				</span>
+			</div>
+			<div class="collapse navbar-collapse" id="main-menu">
+				<ul class="menu">
+					<li class="nav-current" role="presentation"><a href="/">首页</a></li>
+					<li role="presentation"><a href="/">曝光台</a></li>
+					<li role="presentation"><a href="/">防盗防偷</a></li>
+					<li role="presentation"><a href="/">防范大全</a></li>
+					<li role="presentation"><a href="/">法律常识</a></li>
+				</ul>
+			</div>
+	   	</div>
+  	</div>
+   	<div class="login" id="login"><a href="/login">登录</a></div>
 </div>
+<script type="text/javascript">
+	$(function(){
+		commonApp.init();
+	});
+</script>
+<!-- 公共头部导航 end -->

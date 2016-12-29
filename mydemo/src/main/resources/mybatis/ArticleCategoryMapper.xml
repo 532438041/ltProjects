@@ -174,4 +174,9 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=CHAR}
   </update>
+  <select id="getArticleCategoryList" resultMap="BaseResultMap">
+  		select
+		<include refid="Base_Column_List" />
+		from web_article_category order by sort
+  </select>
 </mapper>

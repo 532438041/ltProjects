@@ -14,4 +14,9 @@ public class ArticleDaoImpl extends BaseDaoImpl<Article>implements ArticleDao {
 	public List<Article> getArticList() {
 		return this.getSqlSession().selectList(getStateMentName("getArticleList"));
 	}
+
+	@Override
+	public Article getArticle(String id) {
+		return this.getSqlSession().selectOne(getStateMentName("getArticleById"), id);
+	}
 }
