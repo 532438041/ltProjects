@@ -1,5 +1,7 @@
 package com.java.controller;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,6 +83,26 @@ public class LoginController {
 		ToolsUtil.setCookie(response, "displayName", user.getDisplayName());
 
 		return baseResult.success(1, "登录成功！");
+	}
+
+	@RequestMapping(value = "/register")
+	public BaseResult register(@RequestBody BaseParam<User> baseParam) {
+		BaseResult baseResult = new BaseResult();
+		int status = 0;
+		// 查重校验
+		status = userService.checkRegister(baseParam.getParam());
+		if (status > 0) {
+			return baseResult.failed(2, "该手机号/邮箱已注册！");
+		}
+		baseParam.getParam().setId(ToolsUtil.getUUID());
+		baseParam.getParam().setCreateBy(baseParam.getParam().getId());
+		baseParam.getParam().setCreateTime(new Date());
+		baseParam.getParam().setState("1");
+		baseParam.getParam().setUserType("1");
+		status = userService.insert(baseParam.getParam());
+		baseResult.setStatus(status);
+		baseResult.setMsg(status > 0 ? "注册成功！" : "注册失败！");
+		return baseResult;
 	}
 
 }

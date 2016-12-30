@@ -13,4 +13,6 @@ public interface UserDao extends BaseDao<User>{
 
 	String getUserRoleName(String userId);
 
+	int checkRegister(User user);
+
 }

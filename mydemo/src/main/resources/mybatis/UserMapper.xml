@@ -9,11 +9,9 @@
 		<result column="user_type" property="userType" jdbcType="CHAR" />
 		<result column="email" property="email" jdbcType="VARCHAR" />
 		<result column="mobile" property="mobile" jdbcType="CHAR" />
-		<result column="login_error_count" property="loginErrorCount"
-			jdbcType="INTEGER" />
+		<result column="login_error_count" property="loginErrorCount" jdbcType="INTEGER" />
 		<result column="login_ip" property="loginIp" jdbcType="VARCHAR" />
-		<result column="last_login_time" property="lastLoginTime"
-			jdbcType="TIMESTAMP" />
+		<result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
 		<result column="state" property="state" jdbcType="CHAR" />
 		<result column="create_by" property="createBy" jdbcType="CHAR" />
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -21,36 +19,45 @@
 		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		id, user_name, user_pwd, display_name, user_type, email, mobile,
+		id, user_name, user_pwd, display_name, user_type, email,
+		mobile,
 		login_error_count,
-		login_ip, last_login_time, state, create_by, create_time, update_by,
+		login_ip, last_login_time, state, create_by,
+		create_time, update_by,
 		update_time
 	</sql>
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
-		parameterType="java.lang.String">
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
 		select
 		<include refid="Base_Column_List" />
 		from sc_user
 		where id = #{id,jdbcType=CHAR}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-		delete from sc_user
+		delete from
+		sc_user
 		where id = #{id,jdbcType=CHAR}
 	</delete>
 	<insert id="insert" parameterType="com.java.entity.User">
-		insert into sc_user (id, user_name, user_pwd,
+		insert into sc_user (id,
+		user_name, user_pwd,
 		display_name, user_type, email,
-		mobile, login_error_count, login_ip,
+		mobile,
+		login_error_count, login_ip,
 		last_login_time, state, create_by,
 		create_time, update_by, update_time
 		)
-		values (#{id,jdbcType=CHAR}, #{userName,jdbcType=VARCHAR},
+		values (#{id,jdbcType=CHAR},
+		#{userName,jdbcType=VARCHAR},
 		#{userPwd,jdbcType=VARCHAR},
-		#{displayName,jdbcType=VARCHAR}, #{userType,jdbcType=CHAR}, #{email,jdbcType=VARCHAR},
-		#{mobile,jdbcType=CHAR}, #{loginErrorCount,jdbcType=INTEGER},
+		#{displayName,jdbcType=VARCHAR}, #{userType,jdbcType=CHAR},
+		#{email,jdbcType=VARCHAR},
+		#{mobile,jdbcType=CHAR},
+		#{loginErrorCount,jdbcType=INTEGER},
 		#{loginIp,jdbcType=VARCHAR},
-		#{lastLoginTime,jdbcType=TIMESTAMP}, #{state,jdbcType=CHAR}, #{createBy,jdbcType=CHAR},
-		#{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=CHAR},
+		#{lastLoginTime,jdbcType=TIMESTAMP}, #{state,jdbcType=CHAR},
+		#{createBy,jdbcType=CHAR},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{updateBy,jdbcType=CHAR},
 		#{updateTime,jdbcType=TIMESTAMP}
 		)
 	</insert>
@@ -201,24 +208,32 @@
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.java.entity.User">
 		update sc_user
-		set user_name = #{userName,jdbcType=VARCHAR},
-		user_pwd = #{userPwd,jdbcType=VARCHAR},
-		display_name = #{displayName,jdbcType=VARCHAR},
+		set
+		user_name = #{userName,jdbcType=VARCHAR},
+		user_pwd =
+		#{userPwd,jdbcType=VARCHAR},
+		display_name =
+		#{displayName,jdbcType=VARCHAR},
 		user_type = #{userType,jdbcType=CHAR},
 		email = #{email,jdbcType=VARCHAR},
 		mobile = #{mobile,jdbcType=CHAR},
 		login_error_count = #{loginErrorCount,jdbcType=INTEGER},
-		login_ip = #{loginIp,jdbcType=VARCHAR},
-		last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+		login_ip =
+		#{loginIp,jdbcType=VARCHAR},
+		last_login_time =
+		#{lastLoginTime,jdbcType=TIMESTAMP},
 		state = #{state,jdbcType=CHAR},
-		create_by = #{createBy,jdbcType=CHAR},
-		create_time = #{createTime,jdbcType=TIMESTAMP},
-		update_by = #{updateBy,jdbcType=CHAR},
-		update_time = #{updateTime,jdbcType=TIMESTAMP}
+		create_by =
+		#{createBy,jdbcType=CHAR},
+		create_time =
+		#{createTime,jdbcType=TIMESTAMP},
+		update_by =
+		#{updateBy,jdbcType=CHAR},
+		update_time =
+		#{updateTime,jdbcType=TIMESTAMP}
 		where id = #{id,jdbcType=CHAR}
 	</update>
-	<select id="checkLogin" parameterType="java.lang.String"
-		resultMap="BaseResultMap">
+	<select id="checkLogin" parameterType="java.lang.String" resultMap="BaseResultMap">
 		select * from sc_user where user_name = #{userName}
 	</select>
 	<select id="getUserList" resultMap="BaseResultMap">
@@ -227,9 +242,16 @@
 		from sc_user order by create_time desc
 	</select>
 	<select id="getUserRoleName" parameterType="java.lang.String" resultType="java.lang.String">
-		SELECT GROUP_CONCAT(role.role_name) roleName FROM sc_user_role userRole
-		LEFT JOIN sc_role role ON userRole.role_id = role.id
+		SELECT GROUP_CONCAT(role.role_name) roleName FROM
+		sc_user_role userRole
+		LEFT JOIN sc_role role ON userRole.role_id =
+		role.id
 		WHERE userRole.user_id = #{userId};
+	</select>
+
+	<select id="checkRegister" parameterType="com.java.entity.User" resultType="Integer">
+		SELECT COUNT(0) FROM `sc_user` WHERE user_type = '1' AND state != '0' 
+		AND (user_name = #{userName} OR email = #{userName} OR mobile = #{userName})
 	</select>
 
 </mapper>

@@ -8,6 +8,16 @@
  */
 
 /**
+ * 全局正则
+ */
+// 邮件格式
+var emailPattern = /^([a-zA-Z0-9]+[_|\_|\-|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+// 手机格式
+var mobilePattern = /^1[3|4|5|8|7][0-9]\d{8}$/;
+// 手机或者邮箱
+var mobile_or_email = /(^1[3|4|5|8|7][0-9]\d{8}$)|(^([a-zA-Z0-9]+[_|\_|\-|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$)/;
+
+/**
  * 表单数据转json 格式{"param":{"userName":"liuTao"}}
  */
 $.fn.serializeJson = function(baseParam) {

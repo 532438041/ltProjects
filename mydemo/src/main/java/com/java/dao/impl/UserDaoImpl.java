@@ -26,4 +26,9 @@ public class UserDaoImpl extends BaseDaoImpl<User>implements UserDao {
 		return this.getSqlSession().selectOne("getUserRoleName", userId);
 	}
 
+	@Override
+	public int checkRegister(User user) {
+		return this.getSqlSession().selectOne(getStateMentName("checkRegister"), user);
+	}
+
 }

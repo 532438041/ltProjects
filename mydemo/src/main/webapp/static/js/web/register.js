@@ -41,6 +41,8 @@ registerApp.controller("registerController", function($scope, $http) {
 					success : function(data) {
 						if (data && (data.status === "success")) {
 							$scope.canRegister = true;
+							// 重置注册按钮
+							$('#registerForm').bootstrapValidator('disableSubmitButtons', false);
 						} else {
 							$scope.canRegister = false;
 						}
@@ -54,15 +56,27 @@ registerApp.controller("registerController", function($scope, $http) {
 		$('#registerForm').bootstrapValidator('validate');
 		if ($('#registerForm').data('bootstrapValidator').isValid()) {
 			if ($scope.canRegister) {
-				var param = $("#registerForm").serializeJson();
+				var baseParam = {
+					userPwd : $scope.userPwd
+				};
+				// 判断输入的是手机号还是邮箱
+				if (mobilePattern.test($scope.userName)) {
+					baseParam.mobile = $scope.userName;
+				} else if (emailPattern.test($scope.userName)) {
+					baseParam.email = $scope.userName;
+				} else {
+					baseParam.userName = $scope.userName;
+				}
 				$http({
 					method : "post",
 					url : "/register.json",
-					data : param
+					data : JSON.stringify({
+						param : baseParam
+					})
 				}).success(function(dataResult) {
 					if (dataResult.status == 1) {
 						alert(dataResult.msg);
-						window.location.href = "/";
+						window.location.href = "/login";
 					} else {
 						alert(dataResult.msg);
 					}
@@ -73,3 +87,38 @@ registerApp.controller("registerController", function($scope, $http) {
 		}
 	};
 });
+
+$(function() {
+	$("#registerForm").bootstrapValidator({
+		fields : {
+			userName : {
+				validators : {
+					notEmpty : {
+						message : "手机号/邮箱不能为空！"
+					},
+					regexp : { // 正则校验
+						regexp : mobile_or_email,
+						message : '请填写正确的手机号/邮箱！'
+					},
+					stringLength : {
+						max : 50,
+						message : '请填写正确的手机号/邮箱！'
+					}
+				}
+			},
+			userPwd : {
+				message : '密码不能为空！',
+				validators : {
+					notEmpty : {
+						message : '密码不能为空！'
+					},
+					stringLength : {
+						min : 6,
+						max : 11,
+						message : '密码长度为6-11位！'
+					}
+				}
+			}
+		}
+	});
+})

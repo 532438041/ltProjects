@@ -34,4 +34,9 @@ public class UserServiceImpl extends BaseServiceImpl<User>implements UserService
 		return userDao.getUserRoleName(userId);
 	}
 
+	@Override
+	public int checkRegister(User user) {
+		return userDao.checkRegister(user);
+	}
+
 }

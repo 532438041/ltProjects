@@ -12,5 +12,7 @@ public interface UserService extends BaseService<User>{
 	PageResult<User> getUserList(PageParam<User> pageParam);
 
 	String getUserRoleName(String userId);
+
+	int checkRegister(User user);
 	
 }
