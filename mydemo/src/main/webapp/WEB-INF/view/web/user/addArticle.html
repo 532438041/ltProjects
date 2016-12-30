@@ -47,21 +47,22 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label" for="inputfile"><span class="red">*</span>文章标签</label>
 					<div class="col-sm-9 widget" style="margin: 0px">
-						<div class="content tag-cloud">
-							<input type="hidden" name="articleCateId" required>
-							<a  ng-repeat="articleCate in articleCateList" href="" id="{{articleCate.id}}">{{articleCate.cateName}}</a>
-						</div>
+			            <div class="btn-group" data-toggle="buttons">
+			                <label class="btn btn-default" style="margin-right: 2px;" ng-repeat="articleCate in articleCateList" >
+			                    <input type="radio" name="articleCateId" value="{{articleCate.id}}"/>{{articleCate.cateName}}
+			                </label>
+			            </div>
 					</div>
 				</div>
 				<div class="form-group" >
 					<label class="col-sm-2 control-label" for="inputfile"><span class="red">*</span>文章内容</label>
 				</div>
 				<div class="form-group" >
-					<script id="editor" type="text/plain" style="height:300px;"></script>
+					<script id="editor" name="content" type="text/plain" style="height:300px;"></script>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-offset-6">
-					  <button type="submit" ng-click="articleSubmit()" class="btn btn-default">发布</button>
+					  <button type="button" ng-click="articleSubmit()" class="btn btn-default">发布</button>
 					</div>
 				</div>
 			</form>
@@ -78,9 +79,13 @@
     <script src="/static/js/base/jquery.Query.js"></script>
     <script src="/static/js/base/bootstrapValidator.js"></script>
 	<script src="/static/js/base/formValidator.js"></script>
+	<script src="/static/js/base/common.js"></script>
     <script src="/static/js/main.js"></script>
 	<script type="text/javascript">
 		var addArticleApp = angular.module("addArticle",[]);
+	    //实例化编辑器
+	    //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+	    var ue = UE.getEditor('editor');
 		addArticleApp.controller("addArticleAppController", function($scope, $http) {
 			$http({
 				method : "post",
@@ -92,18 +97,26 @@
 			});
 			//提交文章信息
 			$scope.articleSubmit = function(){
-				alert("sfdsd");
-				$('#addArticleForm').bootstrapValidator('validate');
-				if ($('#addArticleForm').data('bootstrapValidator').isValid()) {
+				/* $('#addArticleForm').bootstrapValidator('validate');
+				if ($('#addArticleForm').data('bootstrapValidator').isValid()) { */
+				    console.log(ue.getContent());
 					var param = $("#addArticleForm").serializeJson();
 					alert(param);
-				}
+				/* } */
+					console.log(ue.getContent());
+					var param = $("#addArticleForm").serializeJson();
+					alert(param);
+				$http({
+					method : "post",
+					url : "/user/articleAdd.json",
+					data:param
+				}).success(function(dataResult) {
+					if(dataResult.status == 1){
+						window.location.href="/userIndex";
+					}
+				});
 			}
 		});
-	    //实例化编辑器
-	    //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
-	    var ue = UE.getEditor('editor');
-	    
 	</script>
 </body>
 </html>

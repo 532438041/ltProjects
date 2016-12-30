@@ -66,6 +66,10 @@ a img {
   padding: 7px 14px;
   border-radius: 2px;
 }
+.btn-user{
+  padding: 2px 7px;
+  border-radius: 2px;
+}
 .btn-default {
   border: 1px solid #e67e22;
   background: #e67e22;
@@ -749,6 +753,12 @@ pre {
   -webkit-transition: all 0.2s ease;
        -o-transition: all 0.2s ease;
           transition: all 0.2s ease;
+}
+.widget .tag-cloud .curse {
+  color: #ffffff;
+  background: #e67e22;
+  border: 1px solid #e67e22;
+  text-decoration: none;
 }
 .widget .tag-cloud a:hover {
   color: #ffffff;

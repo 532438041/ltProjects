@@ -11,7 +11,7 @@
     <link href="/static/css/index.css" rel="stylesheet">
     <link href="/static/css/index.css" rel="stylesheet">
 </head>
-<body ng-app>
+<body ng-app="userIndexApp">
 	<!-- 公共头部导航 start -->
 	<div ng-include="'../header'"></div>
 	<!-- 公共头部导航 end -->
@@ -19,14 +19,14 @@
   		<!-- 用户左边 start -->
 		<div ng-include="'userLeft'"></div>
 		<!-- 用户左边 end -->
-	    <div style="width:60%;width:65%;float: right;margin-right: 15px;">
-			<article id="97" class="post">
-				<div class="featured" title="推荐文章">
+	    <div style="width:60%;width:65%;float: right;margin-right: 15px;" ng-controller="userIndexController">
+			<article id="97" class="post" ng-repeat="article in articleList">
+				<div class="featured" title="推荐文章" ng-if="article.isRecommend==1">
 					<i class="fa fa-start-pos fa-star"></i>
 				</div>
 				<div class="post-head">
 					<h4 class="post-title">
-					<a href="/ghost-zhuo-mian-ban-app-geng-xin-neng-gou-tong-shi-guan-li-duo-ge-ghost-bo-ke/">Ghost 桌面版 APP 正式发布，能同时管理多个 Ghost 博客</a>
+					<a href="/user/article?id={{article.id}}">{{article.title}}</a>
 					</h4>
 					<div class="post-meta">
 					<span class="author">
@@ -34,41 +34,22 @@
 					<a class="text" href="/author/wangsai/">王赛</a>
 					</span>
 					•
-					<time class="post-date" datetime="2016年4月28日星期四上午10点14分" title="2016年4月28日星期四上午10点14分">2016年4月28日</time>
+					<time class="post-date" datetime="{{article.createTime | date:'yyyy-MM-dd hh:mm:ss'}}" title="{{article.createTime | date:'yyyy-MM-dd hh:mm:ss'}}">{{article.createTime | date:'yyyy年MM月dd日'}}</time>
 					</div>
 				</div>
-				<div class="post-content">
-					<p>虽然通过浏览器管理 Ghost 博客虽然很方便，但是在多个 tab 之间切换有时候也会很麻烦，嗯，如果能有一个独立的 app 应该使用起来会更爽一些！ 今天的主角来了，Ghost 桌面版 APP -- Ghost Desktop！ 目前，Ghost Desktop 还处于早期阶段</p>
+				<div class="post-content" ng-if="article.picture!=null && article.picture!=''">
+					<a href="/article?id={{article.id}}">
+						<img src="{{article.picture}}" width="30%" alt="{{article.title}}">
+					</a>
+					<div style="width:68%;float:right;">{{article.subtitle || article.content}}</div>
+				</div>
+				<div class="post-content" ng-if="article.picture ==null || article.picture ==''">
+					<div>{{article.subtitle || article.content}}</div>
 				</div>
 				<div class="post-permalink">
-					<a class="btn btn-default" href="/article">编辑本文</a>
+					<a class="btn-user btn-default" href="/user/editArticle">编辑本文</a>
 				</div>
 			</article>
-			<article id="97" class="post">
-					<div class="post-head">
-						<h1 class="post-title">
-						<a href="/ghost-zhuo-mian-ban-app-geng-xin-neng-gou-tong-shi-guan-li-duo-ge-ghost-bo-ke/">Ghost 桌面版 APP 正式发布，能同时管理多个 Ghost 博客</a>
-						</h1>
-						<div class="post-meta">
-						<span class="author">
-						作者：
-						<a class="text" href="/author/wangsai/">王赛</a>
-						</span>
-						•
-						<time class="post-date" datetime="2016年4月28日星期四上午10点14分" title="2016年4月28日星期四上午10点14分">2016年4月28日</time>
-						</div>
-					</div>
-					<div class="post-content">
-						<a href="/ghost-zhuo-mian-ban-app-geng-xin-neng-gou-tong-shi-guan-li-duo-ge-ghost-bo-ke/">
-						<img src="http://static.ghostchina.com/image/4/45/e447fa21190690b28f1957d5937f4.png" width="30%" alt="Ghost 桌面版 APP 正式发布，能同时管理多个 Ghost 博客">
-						</a>
-						<p style="width:68%;float:right;">虽然通过浏览器管理 Ghost 博客虽然很方便，但是在多个 tab 之间切换有时候也会很麻烦，嗯，如果能有一个独立的 app 应该使用起来会更爽一些！ 今天的主角来了，Ghost 桌面版 APP -- Ghost Desktop！ 目前，Ghost Desktop 还处于早期阶段</p>
-					</div>
-					<div class="clear"></div>
-					<div class="post-permalink">
-						<a class="btn btn-default" href="/article">编辑本文</a>
-					</div>
-				</article>
 		</div>
 	</div>
 	<!-- 公共底部导航 start -->
@@ -84,5 +65,18 @@
     <script src="/static/js/base/bootstrapValidator.js"></script>
     <script src="/static/js/base/jquery-cookie.js"></script>
     <script src="/static/js/main.js"></script>
+    <script type="text/javascript">
+    var userIndexApp = angular.module("userIndexApp",[]);
+    userIndexApp.controller("userIndexController", function($scope, $http) {
+    	$http({
+    		method : "post",
+    		url : "/user/articleList.json",
+    		data : {}
+    	}).success(function(dataResult) {
+    		var result =  dataResult.data.dataList;
+    		$scope.articleList = result;
+    	});
+    });
+    </script>
 </body>
 </html>

@@ -23,6 +23,12 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article>implements Artic
 		PageHelper.startPage(pageParam.getPageNum(), pageParam.getPageSize());
 		return PageUtil.toPagedResult(articleDao.getArticList());
 	}
+	
+	@Override
+	public PageResult<Article> getArticleListByUserId(PageParam<Article> pageParam,String userId){
+		PageHelper.startPage(pageParam.getPageNum(), pageParam.getPageSize());
+		return PageUtil.toPagedResult(articleDao.getArticListByUserId(userId));
+	}
 
 	@Override
 	public Article getArticle(String id) {

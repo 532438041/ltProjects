@@ -54,15 +54,15 @@ $(function(){
 						message: '副标题/简介不能为空！'
 					}
 				}
-			},
-			articleCateId: {
-				message: '文章标签不能为空！',
+			}
+			/*articleCateId: {
+				message: '选择一个文章标签！',
 				validators: {
 					notEmpty: {
-						message: '文章标签不能为空！'
-					}
-				}
-			},
+						message: '文章标签'
+                    }
+                }
+            },
 			content: {
 				message: '文章内容不能为空！',
 				validators: {
@@ -70,7 +70,7 @@ $(function(){
 						message: '文章内容不能为空！'
 					}
 				}
-			}
+			}*/
 		}
 	});
 });
