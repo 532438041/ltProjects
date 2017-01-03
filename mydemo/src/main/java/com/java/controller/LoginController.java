@@ -26,11 +26,6 @@ public class LoginController {
 		User user = userService.checkLogin(baseParam.getParam().getUserName());
 		BaseResult baseResult = new BaseResult();
 		if (ToolsUtil.isNotNull(user)) {
-			if (!baseParam.getParam().getUserPwd().equals(user.getUserPwd())) {
-				// 记录密码错误次数
-
-				return baseResult.failed(-1, "用户名或密码错误！");
-			}
 			if (!user.getUserType().equals("0")) {
 				return baseResult.failed(-2, "该用户不能登录本站点！");
 			}
@@ -39,6 +34,11 @@ public class LoginController {
 			}
 			if (user.getState().equals("0")) {
 				return baseResult.failed(-4, "用户名不存在！");
+			}
+			if (!ToolsUtil.MD5(user.getId() + baseParam.getParam().getUserPwd()).equals(user.getUserPwd())) {
+				// 记录密码错误次数
+
+				return baseResult.failed(-1, "用户名或密码错误！");
 			}
 		} else {
 			return baseResult.failed(0, "用户名不存在！");
@@ -58,11 +58,6 @@ public class LoginController {
 		User user = userService.checkLogin(baseParam.getParam().getUserName());
 		BaseResult baseResult = new BaseResult();
 		if (ToolsUtil.isNotNull(user)) {
-			if (!baseParam.getParam().getUserPwd().equals(user.getUserPwd())) {
-				// 记录密码错误次数
-
-				return baseResult.failed(-1, "用户名或密码错误！");
-			}
 			if (!user.getUserType().equals("1")) {
 				return baseResult.failed(-2, "该用户不能登录本站点！");
 			}
@@ -71,6 +66,11 @@ public class LoginController {
 			}
 			if (user.getState().equals("0")) {
 				return baseResult.failed(-4, "用户名不存在！");
+			}
+			if (!ToolsUtil.MD5(user.getId() + baseParam.getParam().getUserPwd()).equals(user.getUserPwd())) {
+				// 记录密码错误次数
+
+				return baseResult.failed(-1, "用户名或密码错误！");
 			}
 		} else {
 			return baseResult.failed(0, "用户名不存在！");
@@ -95,6 +95,7 @@ public class LoginController {
 			return baseResult.failed(2, "该手机号/邮箱已注册！");
 		}
 		baseParam.getParam().setId(ToolsUtil.getUUID());
+		baseParam.getParam().setUserPwd(ToolsUtil.MD5(baseParam.getParam().getId() + baseParam.getParam().getUserPwd()));
 		baseParam.getParam().setCreateBy(baseParam.getParam().getId());
 		baseParam.getParam().setCreateTime(new Date());
 		baseParam.getParam().setState("1");

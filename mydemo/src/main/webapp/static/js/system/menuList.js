@@ -48,7 +48,7 @@ angular.module("indexApp").controller("menuListController", function($scope, $st
 				$scope.getMenuByPid();
 			}
 		});
-	}
+	};
 
 	$scope.showList();
 
@@ -62,12 +62,14 @@ angular.module("indexApp").controller("menuListController", function($scope, $st
 		var node = $scope.zTree.getNodeByParam("id", $scope.selectedNodeId);
 		$scope.zTree.expandNode(node, true);
 		$scope.getMenuByPid();
-	}
+	};
 
 	// 获取子节点列表
 	$scope.getMenuByPid = function(isCallback) {
 		var baseParam = {
-			pid : $scope.selectedNodeId
+			pid : $scope.selectedNodeId,
+			menuName : $scope.s_menuName,
+			menuUrl : $scope.s_menuUrl
 		};
 		var param = $(".search-from").serializePageJson($scope.pageNum, $scope.pageSize, baseParam);
 		$http({
@@ -88,9 +90,10 @@ angular.module("indexApp").controller("menuListController", function($scope, $st
 				}
 			});
 		})
-	}
+	};
 
 	var modal = new Modal({
+		title : "管理模块",
 		content : $('#menuForm'),
 		onOk : function() {
 			// 表单校验
@@ -121,6 +124,10 @@ angular.module("indexApp").controller("menuListController", function($scope, $st
 			// 初始化Modal
 			$('#menuForm').bootstrapValidator('validate');
 			$('#menuForm').data('bootstrapValidator').resetForm(true);
+			modal.showButton(".btn-ok");
+			$scope.menuId = "";
+			$scope.menuUrl = "";
+			$scope.menuName = "";
 		}
 	});
 
@@ -130,9 +137,34 @@ angular.module("indexApp").controller("menuListController", function($scope, $st
 			alert("模块只能添加到二级目录");
 			return false;
 		}
-		modal.options.title = "添加模块";
+		modal.setTitle("添加模块");
 		modal.open();
-	}
+	};
+
+	$scope.editView = function(id) {
+		modal.setTitle("编辑模块");
+		$scope.getMenuById(id);
+		modal.open();
+	};
+
+	$scope.seeView = function(id) {
+		modal.hideButton(".btn-ok");
+		modal.setTitle("查看模块");
+		$scope.getMenuById(id);
+		modal.open();
+	};
+
+	$scope.getMenuById = function(id) {
+		$http({
+			method : "get",
+			url : "/menu/getMenuById.json?menuId=" + id
+		}).success(function(dataResult) {
+			var data = dataResult.data;
+			$scope.menuId = data.id;
+			$scope.menuUrl = data.menuUrl;
+			$scope.menuName = data.menuName;
+		});
+	};
 
 	$scope.delMenu = function(id) {
 		confirm({
@@ -146,11 +178,10 @@ angular.module("indexApp").controller("menuListController", function($scope, $st
 				});
 			}
 		});
-	}
+	};
 
 	$scope.resetSearch = function() {
-		$scope.menuId = "";
-		$scope.menuUrl = "";
-		$scope.menuName = "";
-	}
+		$scope.s_menuUrl = "";
+		$scope.s_menuName = "";
+	};
 });

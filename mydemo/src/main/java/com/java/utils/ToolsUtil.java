@@ -37,6 +37,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 
@@ -1444,6 +1445,17 @@ public class ToolsUtil {
 		Cookie cookie = new Cookie(name, null);
 		cookie.setMaxAge(0);
 		response.addCookie(cookie);
+	}
+
+	/**
+	 * MD5加密
+	 * 
+	 * @param @param str
+	 * @param @return
+	 * @return String
+	 */
+	public static String MD5(String str) {
+		return DigestUtils.md5Hex(str);
 	}
 
 }

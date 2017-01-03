@@ -16,10 +16,10 @@
 
 <div class="page-main" ng-controller="menuListController">
 	<form role="form" class="form-inline search-from">
-		<label for="s-menuUrl">模块编码：</label>
-		<input id="s-menuUrl" name="menuUrl" ng-model="menuUrl" type="text" class="form-control" required>
-		<label for="s-menuName"class="ml10">模块名称：</label>
-		<input id="s-menuName" name="menuName" ng-model="menuName" type="text" class="form-control">
+		<label for="s_menuUrl">模块编码：</label>
+		<input id="s_menuUrl" name="menuUrl" ng-model="s_menuUrl" type="text" class="form-control" required>
+		<label for="s_menuName"class="ml10">模块名称：</label>
+		<input id="s_menuName" name="menuName" ng-model="s_menuName" type="text" class="form-control">
 		<input type="button" class="ml10 btn btn-default" value="查询" ng-click="getMenuByPid()">
 		<input type="button" class="ml10 btn btn-default" value="重置" ng-click="resetSearch()">
 	</form>
@@ -48,10 +48,10 @@
 						<td>{{$index + 1}}</td>
 						<td>{{menuData.menuUrl}}</td>
 						<td>{{menuData.menuName}}</td>
-						<td>
-							<a href="###">编辑</a>
-							<a class="pointer" ng-click="delMenu(menuData.id)">删除</a>
-							<a ng-clik="">查看</a>
+						<td class="operate">
+							<a ng-click="editView(menuData.id)">编辑</a>
+							<a ng-click="delMenu(menuData.id)">删除</a>
+							<a ng-click="seeView(menuData.id)">查看</a>
 						</td>
 					</tr>
 				</tbody>
@@ -65,13 +65,13 @@
 		<div class="form-group">
 			<label for="menuUrl" class="col-sm-3 control-label">模块编码</label>
 			<div class="col-sm-8">
-				<input type="text" class="form-control" id="menuUrl" name="menuUrl" placeholder="模块编码" data-bv-notempty-message="模块编码不能为空！" required>
+				<input type="text" class="form-control" id="menuUrl" name="menuUrl" ng-model="menuUrl" placeholder="模块编码" data-bv-notempty-message="模块编码不能为空！" required>
 			</div>
         </div>
         <div class="form-group">
 			<label for="menuName" class="col-sm-3 control-label">模块名称</label>
 			<div class="col-sm-8">
-				<input type="text" class="form-control" id="menuName" name="menuName" placeholder="模块名称" data-bv-notempty-message="模块名称不能为空！"  required>
+				<input type="text" class="form-control" id="menuName" name="menuName" ng-model="menuName" placeholder="模块名称" data-bv-notempty-message="模块名称不能为空！"  required>
 			</div>
         </div>
 	</form>

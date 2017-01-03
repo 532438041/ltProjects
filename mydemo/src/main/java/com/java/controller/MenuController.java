@@ -55,7 +55,7 @@ public class MenuController {
 		int status = 0;
 		if (ToolsUtil.isNotNull(baseParam.getParam().getId())) {
 			// 编辑
-			status = menuService.updateByPrimaryKey(baseParam.getParam());
+			status = menuService.updateByPrimaryKeySelective(baseParam.getParam());
 		} else {
 			// 添加
 			baseParam.getParam().setId(ToolsUtil.getUUID());
@@ -81,6 +81,11 @@ public class MenuController {
 		baseResult.setStatus(status);
 		baseResult.setMsg(status == 0 ? "操作失败！" : "操作成功！");
 		return baseResult;
+	}
+
+	@RequestMapping(value = "/getMenuById")
+	public BaseResult getMenuById(String menuId) {
+		return new BaseResult().success(menuService.selectByPrimaryKey(menuId));
 	}
 
 }
