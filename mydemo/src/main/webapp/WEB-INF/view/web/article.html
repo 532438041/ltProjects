@@ -8,7 +8,6 @@
     <title>文章详情</title>
 	<link href="/static/css/base/bootstrap.css" rel="stylesheet">
     <link href="/static/css/base/font-awesome.min.css" rel="stylesheet">
-    <link href="/static/css/base/common.css" rel="stylesheet">
     <link href="/static/css/index.css" rel="stylesheet">
 </head>
 <body ng-app="articleApp" style="background: #f6f6f6;">
@@ -26,7 +25,7 @@
 					<div class="post-meta">
 					<span class="author">
 					作者：
-					<a class="text" href="/author/wangsai/">王赛</a>
+					<a class="text" href="javaScript:void(0)">{{article.displayName}}</a>
 					</span>
 					•
 					<time class="post-date" datetime="{{article.createTime | date:'yyyy-MM-dd hh:mm:ss'}}" title="{{article.createTime | date:'yyyy-MM-dd hh:mm:ss'}}">{{article.createTime | date:'yyyy-MM-dd'}}</time>
@@ -35,9 +34,9 @@
 				<section class="featured-media" ng-if="article.picture!=null && article.picture!=''">
 					<img src="{{article.picture}}" alt="{{article.title}}">
 				</section>
-				<section class="post-content">{{article.content}}</section>
+				<section class="post-content" id="content"></section>
 			</article>
-			<div class="about-author clearfix">
+			<!-- <div class="about-author clearfix">
 				<a href="/author/wangsai/">
 				<img class="avatar pull-left" src="http://static.ghostchina.com/image/5/ea/da657733ee8c9add9cf3fd70183a6.png" alt="王赛">
 				</a>
@@ -54,7 +53,7 @@
 						</span>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 	<!-- 公共底部导航 start -->
@@ -81,6 +80,7 @@
 			}).success(function(dataResult) {
 				var result =  dataResult.data;
 				$scope.article = result;
+				$("#content").html(result.content);
 			});
 		});
 	</script>

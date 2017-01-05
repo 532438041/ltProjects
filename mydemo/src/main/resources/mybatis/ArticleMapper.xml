@@ -18,6 +18,24 @@
 		<result column="check_time" jdbcType="CHAR" property="checkTime" />
 		<result column="is_recommend" jdbcType="CHAR" property="isRecommend" />
 	</resultMap>
+	<resultMap id="BaseResultMapDto" type="com.java.dto.ArticleDto">
+		<id column="id" jdbcType="CHAR" property="id" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="subtitle" jdbcType="VARCHAR" property="subtitle" />
+		<result column="content" jdbcType="VARCHAR" property="content" />
+		<result column="picture" jdbcType="VARCHAR" property="picture" />
+		<result column="user_id" jdbcType="CHAR" property="userId" />
+		<result column="cate_id" jdbcType="CHAR" property="cateId" />
+		<result column="state" jdbcType="CHAR" property="state" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="publish_time" jdbcType="TIMESTAMP" property="publishTime" />
+		<result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+		<result column="check_reason" jdbcType="VARCHAR" property="checkReason" />
+		<result column="check_by" jdbcType="CHAR" property="checkBy" />
+		<result column="check_time" jdbcType="CHAR" property="checkTime" />
+		<result column="is_recommend" jdbcType="CHAR" property="isRecommend" />
+		<result column="display_name" jdbcType="VARCHAR" property="displayName" />
+	</resultMap>
 	<sql id="Base_Column_List">
 		id, title, subtitle, content, picture, user_id, cate_id, state,
 		create_time, publish_time,
@@ -224,7 +242,9 @@
 		<include refid="Base_Column_List" />
 		from web_article where user_id = #{userId} order by create_time desc
 	</select>
-	<select id="getArticleById" parameterType="java.lang.String" resultType="com.java.entity.Article">
-	  SELECT <include refid="Base_Column_List" /> from web_article where ID = #{id}
+	<select id="getArticleById" parameterType="java.lang.String" resultMap="BaseResultMapDto">
+	  SELECT article.*,us.display_name from web_article as article
+	  left join sc_user as us on us.id = article.user_id
+	  where article.ID = #{id}
 	 </select>
 </mapper>

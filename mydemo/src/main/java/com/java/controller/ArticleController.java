@@ -35,7 +35,7 @@ public class ArticleController {
 		return new BaseResult().success(list);
 	}
 	//文章列表  文章分类id
-	@RequestMapping(value = "/article/{cateid}")
+	@RequestMapping(value = "/articleList/{cateid}")
 	public BaseResult getArticleByCateIdList(@PathVariable String cateid) {
 		Article article = articleService.getArticle(cateid);
 		return new BaseResult().success(article);
