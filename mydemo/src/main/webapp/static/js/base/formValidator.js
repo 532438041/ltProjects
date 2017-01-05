@@ -1,36 +1,5 @@
 // JavaScript Document
 $(function(){
-	$('form').bootstrapValidator({
-		message: '该字段不能为空！',
-		feedbackIcons: {
-			valid: '',
-			invalid: '',
-			validating: ''
-		},
-		fields: {
-			userName: {
-				message: '用户名不能为空！',
-				validators: {
-					notEmpty: {
-						message: '用户名不能为空！'
-					}
-				}
-			},
-			userPwd: {
-				message: '密码不能为空！',
-				validators: {
-					notEmpty: {
-						message: '密码不能为空！'
-					},
-					stringLength: {
-						min: 6,
-						max: 11,
-						message: '密码长度为6-11位！'
-					}
-				}
-			}
-		}
-	});
 	$('#addArticleForm').bootstrapValidator({
 		message: '该字段不能为空！',
 		feedbackIcons: {
@@ -54,8 +23,8 @@ $(function(){
 						message: '副标题/简介不能为空！'
 					}
 				}
-			}
-			/*articleCateId: {
+			},
+			cateId: {
 				message: '选择一个文章标签！',
 				validators: {
 					notEmpty: {
@@ -70,7 +39,8 @@ $(function(){
 						message: '文章内容不能为空！'
 					}
 				}
-			}*/
+			}
 		}
 	});
+	
 });
