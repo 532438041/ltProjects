@@ -64,6 +64,14 @@ indexApp.config(function($stateProvider, $urlRouterProvider) {
 				return $ocLazyLoad.load([ "/static/js/system/roleList.js" ]);
 			}
 		}
+	}).state("logList", {
+		url : "/logList",
+		templateUrl : "system/logList.html",
+		resolve : {
+			load : function($ocLazyLoad) {
+				return $ocLazyLoad.load([ "/static/js/system/logList.js" ]);
+			}
+		}
 	});
 });
 

@@ -6,13 +6,13 @@ import java.lang.reflect.Type;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.java.base.BaseDao;
 import com.java.base.BaseService;
 import com.java.utils.ToolsUtil;
 
-@Repository
+@Service
 public class BaseServiceImpl<T> implements BaseService<T>, ApplicationContextAware {
 	private ApplicationContext applicationContext = null;
 	Class<T> clazz;

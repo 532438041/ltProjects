@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.java.common.annotation.SysLog;
 import com.java.common.entity.BaseParam;
 import com.java.common.entity.BaseResult;
 import com.java.entity.User;
@@ -22,6 +23,7 @@ public class LoginController {
 	private UserService userService;
 
 	@RequestMapping(value = "/adminLogin")
+	@SysLog(operationType = "select", operationName = "后台用户登录")
 	public BaseResult AdminLogin(@RequestBody BaseParam<User> baseParam, HttpServletResponse response) {
 		User user = userService.checkLogin(baseParam.getParam().getUserName());
 		BaseResult baseResult = new BaseResult();
@@ -54,6 +56,7 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/login")
+	@SysLog(operationType = "select", operationName = "前台用户登录")
 	public BaseResult login(@RequestBody BaseParam<User> baseParam, HttpServletResponse response) {
 		User user = userService.checkLogin(baseParam.getParam().getUserName());
 		BaseResult baseResult = new BaseResult();
@@ -86,6 +89,7 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/register")
+	@SysLog(operationType = "insert", operationName = "前台用户登录")
 	public BaseResult register(@RequestBody BaseParam<User> baseParam) {
 		BaseResult baseResult = new BaseResult();
 		int status = 0;

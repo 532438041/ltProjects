@@ -125,4 +125,29 @@ tbody tr.tr-nodata td {
 	cursor: pointer;
 }
 
+.w5{
+	width: 5%;
+}
+.w8{
+	width: 8%;
+}
+.w10{
+	width: 10%;
+}
+.w12{
+	width: 12%;
+}
+.w15{
+	width: 15%;
+}
+.w20{
+	width: 20%;
+}
+.w25{
+	width: 25%;
+}
+.w30{
+	width: 30%;
+}
+
 /* table end */

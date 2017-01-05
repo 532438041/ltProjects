@@ -20,7 +20,7 @@
 	<!-- 自动扫描所有注解 -->
 	<context:component-scan base-package="com.java" />
 
-	<aop:aspectj-autoproxy />
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
 
 	<!--避免IE执行AJAX时，返回JSON出现下载文件 -->
 	<bean id="mappingJacksonHttpMessageConverter"

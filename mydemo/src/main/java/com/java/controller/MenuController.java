@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.java.common.annotation.SysLog;
 import com.java.common.entity.BaseParam;
 import com.java.common.entity.BaseResult;
 import com.java.common.entity.PageParam;
@@ -48,6 +49,7 @@ public class MenuController {
 	}
 
 	@RequestMapping(value = "/saveMenu")
+	@SysLog(operationType = "add/update", operationName = "添加、编辑模块")
 	public BaseResult saveMenu(@RequestBody BaseParam<Menu> baseParam, @CookieValue("userId") String userId) {
 		baseParam.getParam().setUpdateBy(userId);
 		baseParam.getParam().setUpdateTime(new Date());
@@ -70,6 +72,7 @@ public class MenuController {
 	}
 
 	@RequestMapping(value = "/deleteMenu")
+	@SysLog(operationType = "delete", operationName = "删除模块")
 	public BaseResult deleteMenu(String menuId, @CookieValue("userId") String userId) {
 		BaseResult baseResult = new BaseResult();
 		Menu menu = new Menu();
