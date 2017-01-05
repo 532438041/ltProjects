@@ -72,7 +72,8 @@ a:focus {
 .page-main {
 	padding: 0 10px;
 }
-.page-pager{
+
+.page-pager {
 	text-align: center;
 }
 
@@ -125,28 +126,35 @@ tbody tr.tr-nodata td {
 	cursor: pointer;
 }
 
-.w5{
+.w5 {
 	width: 5%;
 }
-.w8{
+
+.w8 {
 	width: 8%;
 }
-.w10{
+
+.w10 {
 	width: 10%;
 }
-.w12{
+
+.w12 {
 	width: 12%;
 }
-.w15{
+
+.w15 {
 	width: 15%;
 }
-.w20{
+
+.w20 {
 	width: 20%;
 }
-.w25{
+
+.w25 {
 	width: 25%;
 }
-.w30{
+
+.w30 {
 	width: 30%;
 }
 

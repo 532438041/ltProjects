@@ -67,9 +67,7 @@ angular.module("indexApp").controller("menuListController", function($scope, $st
 	// 获取子节点列表
 	$scope.getMenuByPid = function(isCallback) {
 		var baseParam = {
-			pid : $scope.selectedNodeId,
-			menuName : $scope.s_menuName,
-			menuUrl : $scope.s_menuUrl
+			pid : $scope.selectedNodeId
 		};
 		var param = $(".search-from").serializePageJson($scope.pageNum, $scope.pageSize, baseParam);
 		$http({

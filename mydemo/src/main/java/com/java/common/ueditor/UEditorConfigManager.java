@@ -99,6 +99,7 @@ public final class UEditorConfigManager {
 			conf.put("count", Integer.valueOf(this.jsonConfig.getInt("fileManagerListSize")));
 		}
 
+		conf.put("replacePrefix", this.jsonConfig.getString("replacePrefix"));
 		conf.put("savePath", savePath);
 		conf.put("rootPath", this.rootPath);
 

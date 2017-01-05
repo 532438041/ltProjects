@@ -7,18 +7,34 @@
  * @version V1.0
  */
 
-angular.module("indexApp").controller("logListController", function($scope, $stateParams, $http) {
+var indexApp = angular.module("indexApp");
+
+// 自定义filter
+indexApp.filter("logType", function() {
+	return function(val) {
+		switch (val) {
+			case "00":
+				return "后台操作";
+			case "01":
+				return "后台异常";
+			case "10":
+				return "前台操作";
+			case "11":
+				return "前台异常";
+			default:
+				return "-";
+		}
+	}
+});
+
+indexApp.controller("logListController", function($scope, $stateParams, $http, $filter) {
 
 	$scope.pageNum = 1;
-	$scope.pageSize = 5;
+	$scope.pageSize = 10;
 	$scope.total = 0;
 
 	$scope.showList = function(isCallback) {
-		var baseParam = {
-			method : $scope.s_method,
-			logType : $scope.s_logType
-		};
-		var param = $(".search-from").serializePageJson($scope.pageNum, $scope.pageSize, baseParam);
+		var param = $(".search-from").serializePageJson($scope.pageNum, $scope.pageSize);
 		$http({
 			method : "post",
 			data : param,
@@ -48,6 +64,7 @@ angular.module("indexApp").controller("logListController", function($scope, $sta
 			html : '<button type="button" class="btn btn-sm btn-default btn-cancel">取消</button>',
 			selector : '.btn-cancel'
 		} ],
+		width : 600
 	});
 
 	$scope.seeView = function(id) {
@@ -63,10 +80,10 @@ angular.module("indexApp").controller("logListController", function($scope, $sta
 			var data = dataResult.data;
 			$scope.createName = data.createName;
 			$scope.reqIp = data.reqIp;
-			$scope.createTime = data.createTime;
+			$scope.createTime = $filter('date')(data.createTime, 'yyyy-MM-dd hh:mm:ss');
 			$scope.method = data.method;
 			$scope.details = data.details;
-			$scope.logType = data.logType;
+			$scope.logType = $filter("logType")(data.logType);
 			$scope.exCode = data.exCode;
 			$scope.exDetail = data.exDetail;
 			$scope.params = data.params;

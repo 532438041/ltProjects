@@ -61,16 +61,15 @@ public class UEditorBinaryUploader {
 				return new BaseState(false, 8);
 			}
 
-			savePath = PathFormat.parse(savePath, originFileName);
-
-			String physicalPath = ((String) conf.get("rootPath")) + savePath;
+			String physicalPath = PathFormat.parse(savePath, originFileName);
+			String prefixPath = physicalPath.replace((String) conf.get("replacePrefix"), "");
 
 			InputStream is = file.getInputStream();
 			State storageState = StorageManager.saveFileByInputStream(is, physicalPath, maxSize);
 			is.close();
 
 			if (storageState.isSuccess()) {
-				storageState.putInfo("url", PathFormat.format(savePath));
+				storageState.putInfo("url", prefixPath);
 				storageState.putInfo("type", suffix);
 				storageState.putInfo("original", originFileName + suffix);
 			}

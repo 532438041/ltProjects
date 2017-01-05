@@ -172,6 +172,7 @@
 				AND lo.`log_type` LIKE "%"#{logType}"%" 
 			</if>
 		</where>
+		ORDER BY lo.`create_time` DESC
 	</select>
 	
 </mapper>

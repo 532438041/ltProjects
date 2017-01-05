@@ -7,30 +7,24 @@ package com.java.common.entity;
  */
 public class ImageFileConfig {
 
-	public static final String allowSuffix = "jpg,png,gif,jpeg";
+	/**
+	 * 图片格式限制
+	 */
+	public static final String allowSuffix = "jpg,png,gif,jpeg,bmp";
 
-	/** The Constant uploadFilePath. */
-	public static final String uploadFilePath = "D:/apache-tomcat-7.0.63/webapps/mydemo/static/upload/images";
+	/**
+	 * 图片上传本地路径
+	 */
+	public static final String uploadFilePath = "E:/mydemo/img";
 
-	/** The Constant maxUploadSize. */
+	/**
+	 * 可上传图片最大值
+	 */
 	public static final long maxUploadSize = 4194304;
 
-	/** The Constant imagePrefix. */
-	public static final String imagePrefix = "/static/upload/images";
-
-	/** The Constant imageServer. */
-	public static final String imageServer = "http://localhost/";
-
-	/** The Constant imageCatalog. */
-	public static final String imageCatalog = "img";
-
-	/** The Constant height. */
-	public static final int height = 768;
-
-	/** The width. */
-	public final int width = 1024;
-
-	/** The watermark image. */
-	public final String watermarkImage = "watermarkImage.png";
+	/**
+	 * 图片请求路径
+	 */
+	public static final String imagePrefix = "/img";
 
 }
