@@ -25,6 +25,15 @@ public class ArticleCategoryServiceImpl extends BaseServiceImpl<ArticleCategory>
 		PageHelper.startPage(pageParam.getPageNum(), pageParam.getPageSize());
 		return PageUtil.toPagedResult(articleCateDao.getArticleCategoryList());
 	}
+	
+	/**
+	 * 获取一级分类列表
+	 */
+	@Override
+	public PageResult<ArticleCategory> getArticleCategoryOnceList(PageParam<ArticleCategory> pageParam) {
+		PageHelper.startPage(pageParam.getPageNum(), pageParam.getPageSize());
+		return PageUtil.toPagedResult(articleCateDao.getArticleCategoryOnceList());
+	}
 
 	@Override
 	public List<ArticleCategory> getArticleCategoryList() {

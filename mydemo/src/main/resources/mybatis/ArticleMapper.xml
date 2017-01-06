@@ -249,14 +249,19 @@
 		</if>
 		ORDER BY create_time DESC
 	</select>
-	<select id="getArticleListByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
-		select
-		<include refid="Base_Column_List" />
-		from web_article where user_id = #{userId} order by create_time desc
+	<select id="getArticleListByCateId" parameterType="java.lang.String" resultMap="BaseResultMapDto">
+		SELECT article.*,us.display_name from web_article as article
+		left join sc_user as us on us.id = article.user_id
+		where article.cate_id = #{cateId} order by article.create_time desc
+	</select>
+	<select id="getArticleListByUserId" parameterType="java.lang.String" resultMap="BaseResultMapDto">
+		SELECT article.*,us.display_name from web_article as article
+		left join sc_user as us on us.id = article.user_id
+	    where article.user_id = #{userId} order by article.create_time desc
 	</select>
 	<select id="getArticleById" parameterType="java.lang.String" resultMap="BaseResultMapDto">
 		SELECT article.*,us.display_name from web_article as article
 		left join sc_user as us on us.id = article.user_id
-		where article.ID = #{id}
+		where article.ID = #{id} order by article.create_time desc
 	</select>
 </mapper>

@@ -14,6 +14,11 @@ public class ArticleCategoryDaoImpl extends BaseDaoImpl<ArticleCategory>implemen
 	public List<ArticleCategory> getArticleCategoryList() {
 		return this.getSqlSession().selectList(getStateMentName("getArticleCategoryList"));
 	}
+	
+	@Override
+	public List<ArticleCategory> getArticleCategoryOnceList() {
+		return this.getSqlSession().selectList(getStateMentName("getArticleCategoryOnceList"));
+	}
 
 	@Override
 	public List<ArticleCategory> getCateByPid(ArticleCategory reqParam) {

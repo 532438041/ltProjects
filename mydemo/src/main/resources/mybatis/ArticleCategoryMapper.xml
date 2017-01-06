@@ -179,6 +179,11 @@
 		<include refid="Base_Column_List" />
 		from web_article_category where state = '1' order by cate_level, sort
 	</select>
+	<select id="getArticleCategoryOnceList" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from web_article_category where state = '1' and cate_level='1' order by cate_level, sort
+	</select>
 	<select id="getCateByPid" resultMap="BaseResultMap" parameterType="com.java.entity.ArticleCategory">
 		SELECT
 		<include refid="Base_Column_List" />

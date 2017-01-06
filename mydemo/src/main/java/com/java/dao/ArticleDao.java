@@ -7,9 +7,11 @@ import com.java.dto.ArticleDto;
 import com.java.entity.Article;
 
 public interface ArticleDao extends BaseDao<Article>{
-	public List<Article> getArticList(ArticleDto articleDto);
+	public List<ArticleDto> getArticList(ArticleDto articleDto);
 	
-	public List<Article> getArticListByUserId(String userId);
+	public List<ArticleDto> getArticListByCateId(String cateid);
 	
-	public Article getArticle(String id);
+	public List<ArticleDto> getArticListByUserId(String userId);
+	
+	public ArticleDto getArticle(String id);
 }

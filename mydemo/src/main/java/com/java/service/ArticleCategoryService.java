@@ -10,6 +10,8 @@ import com.java.entity.ArticleCategory;
 public interface ArticleCategoryService extends BaseService<ArticleCategory>{
 
 	PageResult<ArticleCategory> getArticleCategoryList(PageParam<ArticleCategory> pageParam);
+	
+	PageResult<ArticleCategory> getArticleCategoryOnceList(PageParam<ArticleCategory> pageParam);
 
 	List<ArticleCategory> getArticleCategoryList();
 

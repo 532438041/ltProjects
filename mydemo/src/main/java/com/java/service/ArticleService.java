@@ -8,10 +8,12 @@ import com.java.entity.Article;
 
 public interface ArticleService extends BaseService<Article>{
 
-	PageResult<Article> getArticleList(PageParam<ArticleDto> pageParam);
+	PageResult<ArticleDto> getArticleList(PageParam<ArticleDto> pageParam);
 	
-	PageResult<Article> getArticleListByUserId(PageParam<Article> pageParam,String userId);
+	PageResult<ArticleDto> getArticleListByCateId(PageParam<ArticleDto> pageParam,String cateid);
 	
-	Article getArticle(String id);
+	PageResult<ArticleDto> getArticleListByUserId(PageParam<ArticleDto> pageParam,String userId);
+	
+	ArticleDto getArticle(String id);
 	
 }

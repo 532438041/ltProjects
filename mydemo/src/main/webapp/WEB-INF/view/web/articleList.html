@@ -10,11 +10,11 @@
     <link href="/static/css/base/font-awesome.min.css" rel="stylesheet">
     <link href="/static/css/index.css" rel="stylesheet">
 </head>
-<body ng-app="index">
+<body ng-app="articleListApp">
 	<!-- 公共头部导航 start -->
 	<div ng-include="'header'"></div>
 	<!-- 公共头部导航 end -->
-    <div class="container" style="width:90%" ng-controller="indexController">
+    <div class="container" style="width:90%" ng-controller="articleListController">
 	   	<div class="row" ng-repeat="article in articleList">
 			<main class="main-content">
 				<article id="{{article.id}}" class="post">
@@ -62,7 +62,21 @@
     <script src="/static/js/base/bootstrap.min.js"></script>
     <script src="/static/js/base/bootstrapValidator.js"></script>
     <script src="/static/js/base/jquery-cookie.js"></script>
+    <script src="/static/js/base/jquery.Query.js"></script>
     <script src="/static/js/main.js"></script>
-    <script src="/static/js/web/index.js"></script>
+    <script type="text/javascript">
+	    var articleListApp = angular.module("articleListApp",[]);
+	    var cateid = $.query.get("cateid");
+	    articleListApp.controller("articleListController", function($scope, $http) {
+	    	$http({
+	    		method : "post",
+	    		url : "/articleList/"+cateid+".json",
+	    		data : {}
+	    	}).success(function(dataResult) {
+	    		var result =  dataResult.data.dataList;
+	    		$scope.articleList = result;
+	    	});
+	    });
+    </script>
 </body>
 </html>

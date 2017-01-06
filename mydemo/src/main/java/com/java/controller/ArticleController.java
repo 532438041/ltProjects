@@ -29,35 +29,57 @@ public class ArticleController {
 	@Autowired
 	private ArticleCategoryService articleCategoryService;
 
-	// 文章列表
+	/**
+	 * 文章列表
+	 * @param pageParam
+	 * @return
+	 */
 	@RequestMapping(value = "/articleList")
 	public BaseResult getArticleList(@RequestBody PageParam<ArticleDto> pageParam) {
-		PageResult<Article> list = articleService.getArticleList(pageParam);
+		PageResult<ArticleDto> list = articleService.getArticleList(pageParam);
 		return new BaseResult().success(list);
 	}
 
-	// 文章列表 文章分类id
+	/**
+	 * 文章列表 文章分类id
+	 * @param pageParam
+	 * @param cateid
+	 * @return
+	 */
 	@RequestMapping(value = "/articleList/{cateid}")
-	public BaseResult getArticleByCateIdList(@PathVariable String cateid) {
-		Article article = articleService.getArticle(cateid);
-		return new BaseResult().success(article);
+	public BaseResult getArticleByCateIdList(@RequestBody PageParam<ArticleDto> pageParam, @PathVariable String cateid) {
+		PageResult<ArticleDto> list = articleService.getArticleListByCateId(pageParam, cateid);
+		return new BaseResult().success(list);
 	}
 
-	// 文章详情 文章id
+	/**
+	 * 文章详情 文章id
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/article/{id}")
 	public BaseResult getArticleById(@PathVariable String id) {
-		Article article = articleService.getArticle(id);
+		ArticleDto article = articleService.getArticle(id);
 		return new BaseResult().success(article);
 	}
 
-	// 文章分类列表
+	/**
+	 * 文章分类列表
+	 * @param pageParam
+	 * @return
+	 */
 	@RequestMapping(value = "/user/articleCate")
 	public BaseResult getArticleCategoryList(@RequestBody PageParam<ArticleCategory> pageParam) {
-		PageResult<ArticleCategory> list = articleCategoryService.getArticleCategoryList(pageParam);
+		PageResult<ArticleCategory> list = articleCategoryService.getArticleCategoryOnceList(pageParam);
 		return new BaseResult().success(list);
 	}
 
-	// 用户发布文章
+	/**
+	 * 用户发布文章
+	 * @param article
+	 * @param userId
+	 * @return
+	 */
 	@RequestMapping(value = "/user/articleAdd")
 	public BaseResult articleAdd(@RequestBody BaseParam<Article> article, @CookieValue("userId") String userId) {
 		article.getParam().setId(ToolsUtil.getUUID());
@@ -72,13 +94,23 @@ public class ArticleController {
 		return new BaseResult().success(1, "");
 	}
 
-	// 用户文章列表
+	/**
+	 * 用户文章列表
+	 * @param pageParam
+	 * @param userId
+	 * @return
+	 */
 	@RequestMapping(value = "/user/articleList")
-	public BaseResult articleListByUserId(@RequestBody PageParam<Article> pageParam, @CookieValue("userId") String userId) {
-		PageResult<Article> list = articleService.getArticleListByUserId(pageParam, userId);
+	public BaseResult articleListByUserId(@RequestBody PageParam<ArticleDto> pageParam, @CookieValue("userId") String userId) {
+		PageResult<ArticleDto> list = articleService.getArticleListByUserId(pageParam, userId);
 		return new BaseResult().success(list);
 	}
-
+	/**
+	 * 文章审核
+	 * @param baseParam
+	 * @param userId
+	 * @return
+	 */
 	@RequestMapping(value = "/article/checkArticle")
 	public BaseResult checkArticle(@RequestBody BaseParam<Article> baseParam, @CookieValue("userId") String userId) {
 		BaseResult baseResult = new BaseResult();

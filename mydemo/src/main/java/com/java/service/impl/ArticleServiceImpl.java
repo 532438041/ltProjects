@@ -20,19 +20,25 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article>implements Artic
 	private ArticleDao articleDao;
 
 	@Override
-	public PageResult<Article> getArticleList(PageParam<ArticleDto> pageParam) {
+	public PageResult<ArticleDto> getArticleList(PageParam<ArticleDto> pageParam) {
 		PageHelper.startPage(pageParam.getPageNum(), pageParam.getPageSize());
 		return PageUtil.toPagedResult(articleDao.getArticList(pageParam.getReqParam()));
 	}
+	
+	@Override
+	public PageResult<ArticleDto> getArticleListByCateId(PageParam<ArticleDto> pageParam,String cateid) {
+		PageHelper.startPage(pageParam.getPageNum(), pageParam.getPageSize());
+		return PageUtil.toPagedResult(articleDao.getArticListByCateId(cateid));
+	}
 
 	@Override
-	public PageResult<Article> getArticleListByUserId(PageParam<Article> pageParam, String userId) {
+	public PageResult<ArticleDto> getArticleListByUserId(PageParam<ArticleDto> pageParam, String userId) {
 		PageHelper.startPage(pageParam.getPageNum(), pageParam.getPageSize());
 		return PageUtil.toPagedResult(articleDao.getArticListByUserId(userId));
 	}
 
 	@Override
-	public Article getArticle(String id) {
+	public ArticleDto getArticle(String id) {
 		return articleDao.getArticle(id);
 	}
 }

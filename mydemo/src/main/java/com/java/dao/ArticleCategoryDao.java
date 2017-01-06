@@ -8,6 +8,8 @@ import com.java.entity.ArticleCategory;
 public interface ArticleCategoryDao extends BaseDao<ArticleCategory> {
 	
 	public List<ArticleCategory> getArticleCategoryList();
+	
+	public List<ArticleCategory> getArticleCategoryOnceList();
 
 	public List<ArticleCategory> getCateByPid(ArticleCategory reqParam);
 

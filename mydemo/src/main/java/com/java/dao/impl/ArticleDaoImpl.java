@@ -12,17 +12,22 @@ import com.java.entity.Article;
 @Repository
 public class ArticleDaoImpl extends BaseDaoImpl<Article>implements ArticleDao {
 	@Override
-	public List<Article> getArticList(ArticleDto articleDto) {
+	public List<ArticleDto> getArticList(ArticleDto articleDto) {
 		return this.getSqlSession().selectList(getStateMentName("getArticleList"), articleDto);
 	}
 
 	@Override
-	public Article getArticle(String id) {
+	public ArticleDto getArticle(String id) {
 		return this.getSqlSession().selectOne(getStateMentName("getArticleById"), id);
 	}
 
 	@Override
-	public List<Article> getArticListByUserId(String userId) {
+	public List<ArticleDto> getArticListByUserId(String userId) {
 		return this.getSqlSession().selectList(getStateMentName("getArticleListByUserId"), userId);
+	}
+
+	@Override
+	public List<ArticleDto> getArticListByCateId(String cateid) {
+		return this.getSqlSession().selectList(getStateMentName("getArticleListByCateId"), cateid);
 	}
 }
