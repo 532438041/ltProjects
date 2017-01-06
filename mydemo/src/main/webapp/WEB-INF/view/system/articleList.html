@@ -16,9 +16,9 @@
 <div class="page-main" ng-controller="articleListController">
 	<form role="form" class="form-inline search-from">
 		<label for="s_title">文章标题：</label>
-		<input id="s_title" ng-model="s_title" type="text" class="form-control">
-		<label for="s_userName" class="ml10">作者：</label>
-		<input id="s_userName" ng-model="s_userName" type="text" class="form-control">
+		<input id="s_title" name="title" ng-model="s_title" type="text" class="form-control">
+		<label for="s_displayName" class="ml10">作者：</label>
+		<input id="s_displayName" name="displayName" ng-model="s_displayName" type="text" class="form-control">
 		<input type="button" class="ml10 btn btn-default" value="查询" ng-click="showList()">
 		<input type="button" class="ml10 btn btn-default" value="重置" ng-click="resetSearch()">
 	</form>
@@ -43,7 +43,7 @@
 				<tr ng-repeat="articleData in articleList">
 					<td>{{articleData.title}}</td>
 					<td>{{articleData.subtitle}}</td>
-					<td>{{articleData.userName}}</td>
+					<td>{{articleData.displayName}}</td>
 					<td>{{articleData.userType == '0' ? '系统' : '作者' }}</td>
 					<td>{{articleData.cateName}}</td>
 					<td>{{articleData.isRecommend == '1' ? '是' : '否' }}</td>

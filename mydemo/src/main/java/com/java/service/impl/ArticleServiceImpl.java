@@ -8,6 +8,7 @@ import com.java.base.impl.BaseServiceImpl;
 import com.java.common.entity.PageParam;
 import com.java.common.entity.PageResult;
 import com.java.dao.ArticleDao;
+import com.java.dto.ArticleDto;
 import com.java.entity.Article;
 import com.java.service.ArticleService;
 import com.java.utils.PageUtil;
@@ -19,13 +20,13 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article>implements Artic
 	private ArticleDao articleDao;
 
 	@Override
-	public PageResult<Article> getArticleList(PageParam<Article> pageParam) {
+	public PageResult<Article> getArticleList(PageParam<ArticleDto> pageParam) {
 		PageHelper.startPage(pageParam.getPageNum(), pageParam.getPageSize());
-		return PageUtil.toPagedResult(articleDao.getArticList());
+		return PageUtil.toPagedResult(articleDao.getArticList(pageParam.getReqParam()));
 	}
-	
+
 	@Override
-	public PageResult<Article> getArticleListByUserId(PageParam<Article> pageParam,String userId){
+	public PageResult<Article> getArticleListByUserId(PageParam<Article> pageParam, String userId) {
 		PageHelper.startPage(pageParam.getPageNum(), pageParam.getPageSize());
 		return PageUtil.toPagedResult(articleDao.getArticListByUserId(userId));
 	}

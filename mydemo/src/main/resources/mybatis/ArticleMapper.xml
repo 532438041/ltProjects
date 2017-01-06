@@ -15,7 +15,7 @@
 		<result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
 		<result column="check_reason" jdbcType="VARCHAR" property="checkReason" />
 		<result column="check_by" jdbcType="CHAR" property="checkBy" />
-		<result column="check_time" jdbcType="CHAR" property="checkTime" />
+		<result column="check_time" jdbcType="TIMESTAMP" property="checkTime" />
 		<result column="is_recommend" jdbcType="CHAR" property="isRecommend" />
 	</resultMap>
 	<resultMap id="BaseResultMapDto" type="com.java.dto.ArticleDto">
@@ -32,17 +32,18 @@
 		<result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
 		<result column="check_reason" jdbcType="VARCHAR" property="checkReason" />
 		<result column="check_by" jdbcType="CHAR" property="checkBy" />
-		<result column="check_time" jdbcType="CHAR" property="checkTime" />
+		<result column="check_time" jdbcType="TIMESTAMP" property="checkTime" />
 		<result column="is_recommend" jdbcType="CHAR" property="isRecommend" />
 		<result column="display_name" jdbcType="VARCHAR" property="displayName" />
+		<result column="user_type" jdbcType="VARCHAR" property="userType" />
+		<result column="cate_name" jdbcType="VARCHAR" property="cateName" />
 	</resultMap>
 	<sql id="Base_Column_List">
 		id, title, subtitle, content, picture, user_id, cate_id, state,
 		create_time, publish_time,
 		update_time, check_reason, check_by, check_time, is_recommend
 	</sql>
-	<select id="selectByPrimaryKey" parameterType="java.lang.String"
-		resultMap="BaseResultMap">
+	<select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		from web_article
@@ -64,8 +65,9 @@
 		#{content,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, #{userId,jdbcType=CHAR},
 		#{cateId,jdbcType=CHAR}, #{state,jdbcType=CHAR},
 		#{createTime,jdbcType=TIMESTAMP},
-		#{publishTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{checkReason,jdbcType=VARCHAR},
-		#{checkBy,jdbcType=CHAR}, #{checkTime,jdbcType=CHAR},
+		#{publishTime,jdbcType=TIMESTAMP},
+		#{updateTime,jdbcType=TIMESTAMP}, #{checkReason,jdbcType=VARCHAR},
+		#{checkBy,jdbcType=CHAR}, #{checkTime,jdbcType=TIMESTAMP},
 		#{isRecommend,jdbcType=CHAR}
 		)
 	</insert>
@@ -159,7 +161,7 @@
 				#{checkBy,jdbcType=CHAR},
 			</if>
 			<if test="checkTime != null">
-				#{checkTime,jdbcType=CHAR},
+				#{checkTime,jdbcType=TIMESTAMP},
 			</if>
 			<if test="isRecommend != null">
 				#{isRecommend,jdbcType=CHAR},
@@ -206,7 +208,7 @@
 				check_by = #{checkBy,jdbcType=CHAR},
 			</if>
 			<if test="checkTime != null">
-				check_time = #{checkTime,jdbcType=CHAR},
+				check_time = #{checkTime,jdbcType=TIMESTAMP},
 			</if>
 			<if test="isRecommend != null">
 				is_recommend = #{isRecommend,jdbcType=CHAR},
@@ -226,16 +228,26 @@
 		create_time = #{createTime,jdbcType=TIMESTAMP},
 		publish_time = #{publishTime,jdbcType=TIMESTAMP},
 		update_time = #{updateTime,jdbcType=TIMESTAMP},
-		check_reason = #{checkReason,jdbcType=VARCHAR},
+		check_reason =
+		#{checkReason,jdbcType=VARCHAR},
 		check_by = #{checkBy,jdbcType=CHAR},
-		check_time = #{checkTime,jdbcType=CHAR},
+		check_time = #{checkTime,jdbcType=TIMESTAMP},
 		is_recommend = #{isRecommend,jdbcType=CHAR}
 		where id = #{id,jdbcType=CHAR}
 	</update>
-	<select id="getArticleList" resultMap="BaseResultMap">
-		select
-		<include refid="Base_Column_List" />
-		from web_article order by create_time desc
+	<select id="getArticleList" resultMap="BaseResultMapDto" parameterType="com.java.dto.ArticleDto">
+		SELECT article.*,us.display_name, us.user_type, cate.`cate_name`
+		FROM web_article AS article
+		LEFT JOIN sc_user AS us ON us.id = article.user_id
+		LEFT JOIN `web_article_category` cate ON article.`cate_id` = cate.`id`
+		WHERE article.state != '0'
+		<if test="title !=null and title != ''">
+			AND article.`title` LIKE "%"#{title}"%"
+		</if>
+		<if test="displayName != null and displayName !=''">
+			AND us.`display_name` LIKE "%"#{displayName}"%"
+		</if>
+		ORDER BY create_time DESC
 	</select>
 	<select id="getArticleListByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
 		select
@@ -243,8 +255,8 @@
 		from web_article where user_id = #{userId} order by create_time desc
 	</select>
 	<select id="getArticleById" parameterType="java.lang.String" resultMap="BaseResultMapDto">
-	  SELECT article.*,us.display_name from web_article as article
-	  left join sc_user as us on us.id = article.user_id
-	  where article.ID = #{id}
-	 </select>
+		SELECT article.*,us.display_name from web_article as article
+		left join sc_user as us on us.id = article.user_id
+		where article.ID = #{id}
+	</select>
 </mapper>

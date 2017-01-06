@@ -44,12 +44,28 @@ indexApp.controller("articleListController", function($scope, $http) {
 		content : $('#articleForm'),
 		width : 400,
 		onOk : function() {
-			$http({
-				method : "post",
-				url : "/"
-			}).success(function(dataResult) {
-
-			});
+			$('#articleForm').bootstrapValidator('validate');
+			if ($('#articleForm').data('bootstrapValidator').isValid()) {
+				var baseParam = {
+					id : $scope.id,
+					state : "3"
+				}
+				var param = $("#articleForm").serializeJson(baseParam);
+				$http({
+					method : "post",
+					data : param,
+					url : "/article/checkArticle.json"
+				}).success(function(dataResult) {
+					if (dataResult.status == 0) {
+						alert(dataResult.msg);
+						return false;
+					} else {
+						$scope.showList();
+					}
+				});
+			} else {
+				return false;
+			}
 		},
 		onModalHide : function() {
 			// 初始化Modal
@@ -65,11 +81,16 @@ indexApp.controller("articleListController", function($scope, $http) {
 	}
 
 	$scope.recommend = function(id) {
-
+		$http({
+			method : "post",
+			url : "/article/recommendArticle.json?articleId=" + id
+		}).success(function(dataResult) {
+			$scope.showList();
+		});
 	}
 
 	$scope.resetSearch = function() {
 		$scope.s_title = "";
-		$scope.s_userName = "";
+		$scope.s_displayName = "";
 	};
 });

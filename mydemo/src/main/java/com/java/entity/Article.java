@@ -29,7 +29,7 @@ public class Article {
 
     private String checkBy;
 
-    private String checkTime;
+    private Date checkTime;
 
     private String isRecommend;
 
@@ -137,11 +137,11 @@ public class Article {
         this.checkBy = checkBy;
     }
 
-    public String getCheckTime() {
+    public Date getCheckTime() {
         return checkTime;
     }
 
-    public void setCheckTime(String checkTime) {
+    public void setCheckTime(Date checkTime) {
         this.checkTime = checkTime;
     }
 

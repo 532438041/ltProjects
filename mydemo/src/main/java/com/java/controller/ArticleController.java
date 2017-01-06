@@ -13,6 +13,7 @@ import com.java.common.entity.BaseParam;
 import com.java.common.entity.BaseResult;
 import com.java.common.entity.PageParam;
 import com.java.common.entity.PageResult;
+import com.java.dto.ArticleDto;
 import com.java.entity.Article;
 import com.java.entity.ArticleCategory;
 import com.java.service.ArticleCategoryService;
@@ -28,34 +29,37 @@ public class ArticleController {
 	@Autowired
 	private ArticleCategoryService articleCategoryService;
 
-	//文章列表
+	// 文章列表
 	@RequestMapping(value = "/articleList")
-	public BaseResult getArticleList(@RequestBody PageParam<Article> pageParam) {
+	public BaseResult getArticleList(@RequestBody PageParam<ArticleDto> pageParam) {
 		PageResult<Article> list = articleService.getArticleList(pageParam);
 		return new BaseResult().success(list);
 	}
-	//文章列表  文章分类id
+
+	// 文章列表 文章分类id
 	@RequestMapping(value = "/articleList/{cateid}")
 	public BaseResult getArticleByCateIdList(@PathVariable String cateid) {
 		Article article = articleService.getArticle(cateid);
 		return new BaseResult().success(article);
 	}
-	//文章详情 文章id
+
+	// 文章详情 文章id
 	@RequestMapping(value = "/article/{id}")
 	public BaseResult getArticleById(@PathVariable String id) {
 		Article article = articleService.getArticle(id);
 		return new BaseResult().success(article);
 	}
-	//文章分类列表
+
+	// 文章分类列表
 	@RequestMapping(value = "/user/articleCate")
 	public BaseResult getArticleCategoryList(@RequestBody PageParam<ArticleCategory> pageParam) {
-		PageResult<ArticleCategory> list  = articleCategoryService.getArticleCategoryList(pageParam);
+		PageResult<ArticleCategory> list = articleCategoryService.getArticleCategoryList(pageParam);
 		return new BaseResult().success(list);
 	}
-	
-	//用户发布文章
+
+	// 用户发布文章
 	@RequestMapping(value = "/user/articleAdd")
-	public BaseResult articleAdd(@RequestBody BaseParam<Article> article,@CookieValue("userId") String userId) {
+	public BaseResult articleAdd(@RequestBody BaseParam<Article> article, @CookieValue("userId") String userId) {
 		article.getParam().setId(ToolsUtil.getUUID());
 		article.getParam().setState("1");
 		article.getParam().setCreateTime(new Date());
@@ -63,14 +67,35 @@ public class ArticleController {
 		article.getParam().setPublishTime(new Date());
 		article.getParam().setUpdateTime(new Date());
 		article.getParam().setUserId(userId);
-		
+
 		articleService.insert(article.getParam());
-		return new BaseResult().success(1,"");
+		return new BaseResult().success(1, "");
 	}
-	//用户文章列表
+
+	// 用户文章列表
 	@RequestMapping(value = "/user/articleList")
 	public BaseResult articleListByUserId(@RequestBody PageParam<Article> pageParam, @CookieValue("userId") String userId) {
 		PageResult<Article> list = articleService.getArticleListByUserId(pageParam, userId);
 		return new BaseResult().success(list);
+	}
+
+	@RequestMapping(value = "/article/checkArticle")
+	public BaseResult checkArticle(@RequestBody BaseParam<Article> baseParam, @CookieValue("userId") String userId) {
+		BaseResult baseResult = new BaseResult();
+		baseParam.getParam().setCheckBy(userId);
+		baseParam.getParam().setCheckTime(new Date());
+		int status = articleService.updateByPrimaryKeySelective(baseParam.getParam());
+		baseResult.setStatus(status);
+		baseResult.setMsg(status == 0 ? "操作失败！" : "操作成功！");
+		return baseResult;
+	}
+
+	@RequestMapping(value = "/article/recommendArticle")
+	public BaseResult recommendArticle(String articleId) {
+		Article article = new Article();
+		article.setId(articleId);
+		article.setIsRecommend("1");
+		articleService.updateByPrimaryKeySelective(article);
+		return new BaseResult().success();
 	}
 }
