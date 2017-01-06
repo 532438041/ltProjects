@@ -72,6 +72,22 @@ indexApp.config(function($stateProvider, $urlRouterProvider) {
 				return $ocLazyLoad.load([ "/static/js/system/logList.js" ]);
 			}
 		}
+	}).state("cateList", {
+		url : "/cateList",
+		templateUrl : "system/cateList.html",
+		resolve : {
+			load : function($ocLazyLoad) {
+				return $ocLazyLoad.load([ "/static/js/base/jquery.ztree.all.js", "/static/js/system/cateList.js" ]);
+			}
+		}
+	}).state("articleList", {
+		url : "/articleList",
+		templateUrl : "system/articleList.html",
+		resolve : {
+			load : function($ocLazyLoad) {
+				return $ocLazyLoad.load([ "/static/js/system/articleList.js" ]);
+			}
+		}
 	});
 });
 

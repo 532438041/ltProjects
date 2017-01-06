@@ -9,4 +9,6 @@ public interface ArticleCategoryDao extends BaseDao<ArticleCategory> {
 	
 	public List<ArticleCategory> getArticleCategoryList();
 
+	public List<ArticleCategory> getCateByPid(ArticleCategory reqParam);
+
 }

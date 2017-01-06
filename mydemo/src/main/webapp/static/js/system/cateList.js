@@ -1,13 +1,13 @@
 /**
- * @Title: menuList.js
+ * @Title: cateList.js
  * @Package src/main/webapp/static/js/system/
- * @Description: 菜单列表
+ * @Description: 分类列表
  * @author LiuTao
- * @date 2016年11月22日 下午1:54:24
+ * @date 2017年1月5日 下午1:54:24
  * @version V1.0
  */
 
-angular.module("indexApp").controller("menuListController", function($scope, $http) {
+angular.module("indexApp").controller("cateListController", function($scope, $http) {
 
 	$scope.showList = function() {
 		$scope.pageNum = 1;
@@ -15,30 +15,33 @@ angular.module("indexApp").controller("menuListController", function($scope, $ht
 		$scope.total = 0;
 		$http({
 			method : "get",
-			url : "/menu/getMenuTree.json"
+			url : "/cate/getCateTree.json"
 		}).success(function(dataResult) {
-			var menuList = dataResult.data || [];
-			if (menuList.length == 0) {
+			var cateList = dataResult.data || [];
+			if (cateList.length == 0) {
 				$scope.selectedNodeId = "0";
 			}
 			var treeData = [ {
 				id : "0",
 				pid : "-1",
-				name : "模块管理"
+				cateLevel : 0,
+				name : "分类管理"
 			} ];
-			for (var i = 0; i < menuList.length; i++) {
-				// 默认选中第一个一级菜单
-				if (!!!$scope.selectedNodeId && menuList[i].pid == 0) {
-					$scope.selectedNodeId = menuList[i].id;
+			for (var i = 0; i < cateList.length; i++) {
+				// 默认选中第一个一级分类
+				if (!!!$scope.selectedNodeId && cateList[i].pid == 0) {
+					$scope.selectedNodeId = cateList[i].id;
 				}
 				var nodeData = {
-					id : menuList[i].id,
-					pid : menuList[i].pid,
-					name : menuList[i].menuName
+					id : cateList[i].id,
+					pid : cateList[i].pid,
+					pids : cateList[i].pids,
+					cateLevel : cateList[i].cateLevel,
+					name : cateList[i].cateName
 				};
 				treeData.push(nodeData);
 			}
-			$scope.zTree = $.fn.zTree.init($("#menuTree"), {
+			$scope.zTree = $.fn.zTree.init($("#cateTree"), {
 				callback : {
 					onClick : $scope.selectNode
 				}
@@ -48,7 +51,7 @@ angular.module("indexApp").controller("menuListController", function($scope, $ht
 				var node = $scope.zTree.getNodeByParam("id", $scope.selectedNodeId);
 				$scope.zTree.selectNode(node);
 				$scope.zTree.expandNode(node, true);
-				$scope.getMenuByPid();
+				$scope.getCateByPid();
 			}
 		});
 	};
@@ -64,11 +67,11 @@ angular.module("indexApp").controller("menuListController", function($scope, $ht
 		$scope.selectedNodeId = $scope.zTree.getSelectedNodes()[0].id;
 		var node = $scope.zTree.getNodeByParam("id", $scope.selectedNodeId);
 		$scope.zTree.expandNode(node, true);
-		$scope.getMenuByPid();
+		$scope.getCateByPid();
 	};
 
 	// 获取子节点列表
-	$scope.getMenuByPid = function(isCallback) {
+	$scope.getCateByPid = function(isCallback) {
 		var baseParam = {
 			pid : $scope.selectedNodeId
 		};
@@ -76,9 +79,9 @@ angular.module("indexApp").controller("menuListController", function($scope, $ht
 		$http({
 			method : "post",
 			data : param,
-			url : "/menu/getMenuByPid.json"
+			url : "/cate/getCateByPid.json"
 		}).success(function(dataResult) {
-			$scope.menuList = dataResult.data.dataList || [];
+			$scope.cateList = dataResult.data.dataList || [];
 			$scope.total = dataResult.data.total;
 			if (isCallback)
 				return false;
@@ -87,34 +90,37 @@ angular.module("indexApp").controller("menuListController", function($scope, $ht
 				limit : $scope.pageSize,
 				callback : function(curr, limit, totalCount) {
 					$scope.pageNum = curr;
-					$scope.getMenuByPid(true);
+					$scope.getCateByPid(true);
 				}
 			});
 		})
 	};
 
 	var modal = new Modal({
-		title : "管理模块",
-		content : $('#menuForm'),
+		title : "管理分类",
+		content : $('#cateForm'),
 		onOk : function() {
 			var sNodes = $scope.zTree.getSelectedNodes();
 			if (sNodes.length > 0) {
 				// 表单校验
-				$('#menuForm').bootstrapValidator('validate');
-				if ($('#menuForm').data('bootstrapValidator').isValid()) {
+				$('#cateForm').bootstrapValidator('validate');
+				if ($('#cateForm').data('bootstrapValidator').isValid()) {
 					var baseParam = {
-						id : $scope.menuId
+						id : $scope.cateId
 					}
-					if (!!!$scope.menuId) {
+					if (!!!$scope.cateId) {
 						// 添加时的参数
 						baseParam.pid = $scope.selectedNodeId;
+						baseParam.pids = (!!sNodes[0].pids ? (sNodes[0].pids + ',') : '') + sNodes[0].id;
+						baseParam.cateLevel = ++sNodes[0].cateLevel;
 						baseParam.sort = !!sNodes[0].children ? ++sNodes[0].children.length : 1;
 					}
-					var param = $("#menuForm").serializeJson(baseParam);
+
+					var param = $("#cateForm").serializeJson(baseParam);
 					$http({
 						method : "post",
 						data : param,
-						url : "/menu/saveMenu.json"
+						url : "/cate/saveCate.json"
 					}).success(function(dataResult) {
 						if (dataResult.status == 0) {
 							alert(dataResult.msg);
@@ -133,57 +139,57 @@ angular.module("indexApp").controller("menuListController", function($scope, $ht
 		},
 		onModalHide : function() {
 			// 初始化Modal
-			$('#menuForm').bootstrapValidator('validate');
-			$('#menuForm').data('bootstrapValidator').resetForm(true);
+			$('#cateForm').bootstrapValidator('validate');
+			$('#cateForm').data('bootstrapValidator').resetForm(true);
 			modal.showButton(".btn-ok");
-			$scope.menuId = "";
-			$scope.menuUrl = "";
-			$scope.menuName = "";
+			$scope.cateId = "";
+			$scope.cateName = "";
+			$scope.remark = "";
 		}
 	});
 
-	$scope.addMenuView = function() {
-		// 限制到二级
-		if (!!$scope.zTree.getSelectedNodes()[0].pid && $scope.zTree.getSelectedNodes()[0].pid != "0") {
-			alert("模块只能添加到二级目录");
-			return false;
-		}
-		modal.setTitle("添加模块");
+	$scope.addCateView = function() {
+		/*
+		 * // 限制到二级 if (!!$scope.zTree.getSelectedNodes()[0].pid &&
+		 * $scope.zTree.getSelectedNodes()[0].pid != "0") {
+		 * alert("分类只能添加到二级目录"); return false; }
+		 */
+		modal.setTitle("添加分类");
 		modal.open();
 	};
 
 	$scope.editView = function(id) {
-		modal.setTitle("编辑模块");
-		$scope.getMenuById(id);
+		modal.setTitle("编辑分类");
+		$scope.getCateById(id);
 		modal.open();
 	};
 
 	$scope.seeView = function(id) {
 		modal.hideButton(".btn-ok");
-		modal.setTitle("查看模块");
-		$scope.getMenuById(id);
+		modal.setTitle("查看分类");
+		$scope.getCateById(id);
 		modal.open();
 	};
 
-	$scope.getMenuById = function(id) {
+	$scope.getCateById = function(id) {
 		$http({
 			method : "get",
-			url : "/menu/getMenuById.json?menuId=" + id
+			url : "/cate/getCateById.json?cateId=" + id
 		}).success(function(dataResult) {
 			var data = dataResult.data;
-			$scope.menuId = data.id;
-			$scope.menuUrl = data.menuUrl;
-			$scope.menuName = data.menuName;
+			$scope.cateId = data.id;
+			$scope.cateName = data.cateName;
+			$scope.remark = data.remark;
 		});
 	};
 
-	$scope.delMenu = function(id) {
+	$scope.delCate = function(id) {
 		confirm({
 			msg : "确认删除？",
 			onOk : function() {
 				$http({
 					method : "post",
-					url : "/menu/deleteMenu.json?menuId=" + id
+					url : "/cate/deleteCate.json?cateId=" + id
 				}).success(function(dataResult) {
 					$scope.showList();
 				});
@@ -192,7 +198,7 @@ angular.module("indexApp").controller("menuListController", function($scope, $ht
 	};
 
 	$scope.resetSearch = function() {
-		$scope.s_menuUrl = "";
-		$scope.s_menuName = "";
+		$scope.s_cateName = "";
+		$scope.s_remark = "";
 	};
 });

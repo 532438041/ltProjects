@@ -7,5 +7,5 @@
  * @version V1.0
  */
 
-angular.module("indexApp").controller("roleListController", function($scope, $stateParams){
+angular.module("indexApp").controller("roleListController", function($scope){
 });

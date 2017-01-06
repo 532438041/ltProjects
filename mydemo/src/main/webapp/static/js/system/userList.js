@@ -7,5 +7,5 @@
  * @version V1.0
  */
 
-angular.module("indexApp").controller("userListController", function($scope, $stateParams){
+angular.module("indexApp").controller("userListController", function($scope){
 });

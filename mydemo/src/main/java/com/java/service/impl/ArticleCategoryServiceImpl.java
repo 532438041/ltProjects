@@ -1,5 +1,7 @@
 package com.java.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +22,18 @@ public class ArticleCategoryServiceImpl extends BaseServiceImpl<ArticleCategory>
 
 	@Override
 	public PageResult<ArticleCategory> getArticleCategoryList(PageParam<ArticleCategory> pageParam) {
-		// TODO Auto-generated method stub
 		PageHelper.startPage(pageParam.getPageNum(), pageParam.getPageSize());
 		return PageUtil.toPagedResult(articleCateDao.getArticleCategoryList());
+	}
+
+	@Override
+	public List<ArticleCategory> getArticleCategoryList() {
+		return articleCateDao.getArticleCategoryList();
+	}
+
+	@Override
+	public PageResult<ArticleCategory> getCateByPid(PageParam<ArticleCategory> pageParam) {
+		PageHelper.startPage(pageParam.getPageNum(), pageParam.getPageSize());
+		return PageUtil.toPagedResult(articleCateDao.getCateByPid(pageParam.getReqParam()));
 	}
 }

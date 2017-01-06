@@ -27,7 +27,7 @@ indexApp.filter("logType", function() {
 	}
 });
 
-indexApp.controller("logListController", function($scope, $stateParams, $http, $filter) {
+indexApp.controller("logListController", function($scope, $http, $filter) {
 
 	$scope.pageNum = 1;
 	$scope.pageSize = 10;
