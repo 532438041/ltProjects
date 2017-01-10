@@ -10,6 +10,7 @@
 	<link href="/static/css/base/font-awesome.min.css" rel="stylesheet">
 	<link href="/static/css/base/bootstrapValidator.css" rel="stylesheet">
 	<link href="/static/css/base/public.css" rel="stylesheet">
+	<link href="/static/css/web/header.css" rel="stylesheet">
 	<link href="/static/css/web/login.css" rel="stylesheet">
 	<script src="/static/js/base/angular.min.js"></script>
 	<script src="/static/js/base/jquery-3.1.1.min.js"></script>
@@ -21,21 +22,12 @@
 	<script src="/static/js/web/login.js"></script>
 </head>
 <body ng-app="loginApp">
-	<div class="navbar navbar-default" role="navigation">
-		<ul class="nav navbar-nav navbar-right">
-			<li>
-				<a href="/login"><span class="fa fa-sign-in"></span> 登录</a>
-			</li>
-			<li>
-				<a href="/register"><span class="fa fa-user"></span> 注册</a>
-			</li>
-		</ul>
-	</div>
+	
+	<!-- 公共头部导航 start -->
+	<div ng-include="'header'"></div>
+	
 	<div class="container" ng-controller="loginController">
 		<div class="login-page">
-			<div class="logo">
-				<img src="/static/images/img_logo.png">
-			</div>
 			<h4 class="title">
 				<span>
 					<a class="active" href="/login">登录</a>

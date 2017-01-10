@@ -1,4 +1,21 @@
-/* login register */
+
+/* header */
+html, body {
+	color: #505050;
+	line-height: 1.75em;
+	background: #f6f6f6;
+	position: relative;
+	font-family: "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "Hiragino Sans GB W3", "WenQuanYi Micro Hei", "Microsoft YaHei UI", "Microsoft YaHei", sans-serif;
+}
+.main-navigation {
+	background: #ffffff none repeat scroll 0 0;
+    border-bottom: 2px solid #e1e1e1;
+    border-top: 1px solid #ebebeb;
+    height: 58px;
+    margin-bottom: 35px;
+}
+
+/* login */
 .container{
 	width:  400px;
 	background: white;
@@ -48,7 +65,6 @@
 
 .login-page form {
 	width: 300px;
-	border-bottom: 1px solid #eee;
 	margin: 0 auto 20px;
 }
 
