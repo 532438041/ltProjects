@@ -34,13 +34,13 @@
 						<time class="post-date" datetime="{{article.createTime | date:'yyyy-MM-dd HH:mm:ss'}}" title="{{article.createTime | date:'yyyy-MM-dd HH:mm:ss'}}">{{article.createTime | date:'yyyy年MM月dd日'}}</time>
 						</div>
 					</div>
-					<div class="post-content" ng-if="article.picture!=null && article.picture!=''">
+					<div class="post-content" ng-if="article.picture != null && article.picture!=''">
 						<a href="/article?id={{article.id}}">
-							<img src="{{article.picture}}" width="30%" alt="{{article.title}}">
+							<img ng-src="{{article.picture}}" width="30%" alt="{{article.title}}">
 						</a>
 						<div style="width:68%;float:right;">{{article.subtitle || article.content}}</div>
 					</div>
-					<div class="post-content" ng-if="article.picture ==null || article.picture ==''">
+					<div class="post-content" ng-if="article.picture == null || article.picture ==''">
 						<div>{{article.subtitle || article.content}}</div>
 					</div>
 					<div class="post-permalink">

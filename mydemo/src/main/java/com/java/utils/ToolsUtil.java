@@ -1440,7 +1440,7 @@ public class ToolsUtil {
 	 * 
 	 * @param name
 	 */
-	protected void removeCookie(HttpServletResponse response, String name) {
+	public static void removeCookie(HttpServletResponse response, String name) {
 		Cookie cookie = new Cookie(name, null);
 		cookie.setMaxAge(0);
 		response.addCookie(cookie);

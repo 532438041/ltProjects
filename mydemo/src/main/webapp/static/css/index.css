@@ -171,7 +171,7 @@ pre {
   margin-bottom: 35px;
   border-bottom: 2px solid #e1e1e1;
 }
-.main-navigation .login{float: right;top: 18px;right: 10px;position: absolute;}
+.main-navigation .login{float: right;top: 18px;right: 20px;position: absolute;}
 .main-navigation a{color: #505050;margin-left:5px;}
 .main-navigation a:hover{color: #e67e22;text-decoration: none;}
 .main-navigation .menu {

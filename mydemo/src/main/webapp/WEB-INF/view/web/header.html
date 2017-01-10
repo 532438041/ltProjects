@@ -1,5 +1,5 @@
 <!-- 公共头部导航 start -->
-<div class="main-navigation" ng-controller="indexHeaderController">
+<div class="main-navigation">
 	<div class="row" >
 		<div class="col-sm-12">
 			<div class="navbar-header">
@@ -24,17 +24,6 @@
 <script type="text/javascript">
 	$(function(){
 		commonApp.init();
-	});
-	var indexApp = angular.module("index",[]);
-	indexApp.controller("indexHeaderController", function($scope, $http) {
-		$http({
-			method : "post",
-			url : "/articleList.json",
-			data : {}
-		}).success(function(dataResult) {
-			var result =  dataResult.data.dataList;
-			$scope.articleList = result;
-		});
 	});
 </script>
 <!-- 公共头部导航 end -->

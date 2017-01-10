@@ -91,18 +91,17 @@ indexApp.config(function($stateProvider, $urlRouterProvider) {
 	});
 });
 
-indexApp.controller("topController", function($scope, $rootScope) {
+indexApp.controller("topController", function($scope, $rootScope, $http) {
 	$scope.displayName = $.cookie("displayName") || "游客用户";
 
 	// 全局退出登录
 	$rootScope.logout = function() {
-		$.removeCookie('userId', {
-			path : '/'
+		$http({
+			method : "get",
+			url : "/adminLogout.json"
+		}).success(function() {
+			window.location.href = "/login.html";
 		});
-		$.removeCookie('displayName', {
-			path : '/'
-		});
-		window.location.href = "/login.html";
 	}
 });
 

@@ -9,6 +9,12 @@
 var loginApp = angular.module("loginApp", []);
 loginApp.controller("loginController", function($scope, $http) {
 	$scope.loginBtn = function() {
+		var backUrl = window.location.search;
+		if (!!backUrl && backUrl.indexOf("backUrl") > -1) {
+			backUrl = backUrl.substring(9, backUrl.length);
+		} else {
+			backUrl = "/";
+		}
 		$('#loginForm').bootstrapValidator('validate');
 		if ($('#loginForm').data('bootstrapValidator').isValid()) {
 			var param = $("#loginForm").serializeJson();
@@ -19,7 +25,7 @@ loginApp.controller("loginController", function($scope, $http) {
 			}).success(function(dataResult) {
 				if (dataResult.status == 1) {
 					alert(dataResult.msg);
-					window.location.href = "/";
+					window.location.href = backUrl;
 				} else {
 					alert(dataResult.msg);
 				}
