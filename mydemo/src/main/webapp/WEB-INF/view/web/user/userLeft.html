@@ -1,29 +1,56 @@
 <!-- 用户左边公共部分 start -->
-<aside class="col-md-4 sidebar" ng-app="userLeftApp">
-	<div class="widget" ng-controller="userLeftController">
+<aside class="col-md-4 sidebar">
+	<div class="widget">
 		<h4 class="title">个人信息</h4>
 		<div class="content community">
 			<p>用户名：dfsdfa</p>
 			<p>简介：所发生的发打发打发的</p>
 			<p><a class="btn btn-default" href="/user/addArticle">发布文章</a></p>
 		</div>
-		<h4 class="title" style="margin-top: 25px">标签</h4>
-		<div class="content tag-cloud">
-			<a href="/tag/jquery/" ng-repeat="articleCate in articleCateList">{{articleCate.cateName}}</a>
+		<h4 class="title" style="margin-top: 25px">常用标签</h4>
+		<div class="content tag-cloud" id="userCateList">
 		</div>
 	</div>
 </aside>
 <script type="text/javascript">
-	var userLeftApp = angular.module("userLeftApp",[]);
-	userLeftApp.controller("userLeftController", function($scope, $http) {
-		$http({
-			method : "post",
-			url : "/user/articleCate.json",
-			data:{}
-		}).success(function(dataResult) {
-			var result =  dataResult.data.dataList;
-			$scope.articleCateList = result;
-		});
+	$(function(){
+		//头部导航数据
+		$.ajax({
+             type: "post",
+             async:false,
+             url : "/user/articleCate.json",
+             data: "{}",
+             dataType:"json",
+             contentType: "application/json",
+             success: function (result){
+                 var articleCateList = result.data.dataList;
+                 if(articleCateList.length > 0){
+	                 var userLeftCateStr = "";
+                	 for(var i=0;i<articleCateList.length;i++){
+                		 userLeftCateStr +='<a href="/user/userCateList?cateid='+articleCateList[i].id+'">'+articleCateList[i].cateName+'</a>';
+                	 }
+                	 $("#userCateList").html(userLeftCateStr);
+                 }
+             }
+         });
+		$.ajax({
+            type: "post",
+            async:false,
+            url : "/user/articleCate.json",
+            data: "{}",
+            dataType:"json",
+            contentType: "application/json",
+            success: function (result){
+                var articleCateList = result.data.dataList;
+                if(articleCateList.length > 0){
+	                 var userLeftCateStr = "";
+               	 for(var i=0;i<articleCateList.length;i++){
+               		 userLeftCateStr +='<a href="/user/userCateList?cateid='+articleCateList[i].id+'">'+articleCateList[i].cateName+'</a>';
+               	 }
+               	 $("#userCateList").html(userLeftCateStr);
+                }
+            }
+        });
 	});
 </script>
 <!-- 用户左边公共部分 end -->

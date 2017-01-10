@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.java.common.entity.BaseParam;
@@ -68,7 +69,7 @@ public class ArticleController {
 	 * @param pageParam
 	 * @return
 	 */
-	@RequestMapping(value = "/user/articleCate")
+	@RequestMapping(value = "/user/articleCate",method = RequestMethod.POST)
 	public BaseResult getArticleCategoryList(@RequestBody PageParam<ArticleCategory> pageParam) {
 		PageResult<ArticleCategory> list = articleCategoryService.getArticleCategoryOnceList(pageParam);
 		return new BaseResult().success(list);

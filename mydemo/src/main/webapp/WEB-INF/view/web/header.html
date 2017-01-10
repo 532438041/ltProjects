@@ -10,20 +10,45 @@
 			</div>
 			<div class="collapse navbar-collapse" id="main-menu">
 				<ul class="menu">
-					<li class="nav-current" role="presentation"><a href="/">首页</a></li>
-					<li role="presentation"><a href="/articleList?cateid=1">曝光台</a></li>
-					<li role="presentation"><a href="/articleList?cateid=2">防盗防偷</a></li>
-					<li role="presentation"><a href="/articleList?cateid=3">防范大全</a></li>
-					<li role="presentation"><a href="/articleList?cateid=4">法律常识</a></li>
+					<li role="presentation"><a href="/">首页</a></li>
 				</ul>
 			</div>
 	   	</div>
   	</div>
    	<div class="login" id="login"><a href="/login">登录</a></div>
 </div>
+<script src="/static/js/base/jquery-3.1.1.min.js"></script>
+<script src="/static/js/base/jquery.Query.js"></script>
+<script src="/static/js/base/jquery-cookie.js"></script>
 <script type="text/javascript">
 	$(function(){
 		commonApp.init();
+		var cateid = $.query.get("cateid");
+		//头部导航数据
+		$.ajax({
+             type: "post",
+             async:false,
+             url : "/user/articleCate.json",
+             data: "{}",
+             dataType:"json",
+             contentType: "application/json",
+             success: function (result){
+                 var articleCateList = result.data.dataList;
+                 if(articleCateList.length > 0){
+	                 var headerCateStr = "";
+                	 for(var i=0;i<articleCateList.length;i++){
+                		 headerCateStr +='<li role="presentation" id="'+articleCateList[i].id+'"><a href="/articleList?cateid='+articleCateList[i].id+'">'+articleCateList[i].cateName+'</a></li>';
+                	 }
+                	 $(".menu").append(headerCateStr);
+                 }
+             }
+         });
+		//头部导航样式
+		if(cateid=="" || cateid==null){
+			$(".menu li").eq(0).addClass("nav-current").siblings().removeClass("nav-current");
+		}else{
+			$(".menu").find("#"+cateid).addClass("nav-current").siblings().removeClass("nav-current");
+		}
 	});
 </script>
 <!-- 公共头部导航 end -->
