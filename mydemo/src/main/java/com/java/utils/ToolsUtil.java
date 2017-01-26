@@ -1386,7 +1386,6 @@ public class ToolsUtil {
 		}
 		Cookie cookie = new Cookie(name, value);
 		cookie.setPath("/");
-		cookie.setMaxAge(60 * 60 * 1);// 默认一小时失效
 		response.addCookie(cookie);
 	}
 

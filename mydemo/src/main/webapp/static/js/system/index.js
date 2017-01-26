@@ -96,8 +96,12 @@ indexApp.controller("topController", function($scope, $rootScope) {
 
 	// 全局退出登录
 	$rootScope.logout = function() {
-		$.cookie('userId', '');
-		$.cookie('displayName', '');
+		$.removeCookie('userId', {
+			path : '/'
+		});
+		$.removeCookie('displayName', {
+			path : '/'
+		});
 		window.location.href = "/login.html";
 	}
 });

@@ -27,3 +27,29 @@ loginApp.controller("loginController", function($scope, $http) {
 		}
 	};
 });
+
+$(function() {
+	$("#loginForm").bootstrapValidator({
+		fields : {
+			userName : {
+				validators : {
+					notEmpty : {
+						message : "手机号/邮箱不能为空！"
+					},
+					stringLength : {
+						max : 50,
+						message : '请填写正确的手机号/邮箱！'
+					}
+				}
+			},
+			userPwd : {
+				message : '密码不能为空！',
+				validators : {
+					notEmpty : {
+						message : '密码不能为空！'
+					}
+				}
+			}
+		}
+	});
+})

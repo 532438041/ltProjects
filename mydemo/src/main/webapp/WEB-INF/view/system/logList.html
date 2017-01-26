@@ -49,7 +49,7 @@
 				<tr ng-repeat="logData in logList">
 					<td>{{logData.createName || '游客'}}</td>
 					<td>{{logData.reqIp}}</td>
-					<td>{{logData.createTime | date : 'yyyy-MM-dd hh:mm:ss'}}</td>
+					<td>{{logData.createTime | date : 'yyyy-MM-dd HH:mm:ss'}}</td>
 					<td>{{logData.method}}</td>
 					<td>{{logData.details}}</td>
 					<td>{{logData.logType | logType : logData.logType}}</td>

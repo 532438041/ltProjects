@@ -120,6 +120,8 @@ var Modal = (function ($) {
             !this.$modal && initModal(this, this.options);
             BackDrop.show();
             this.$modal.modal('show');
+            // 如果有确定按钮 则焦点获取到确定 否则焦点获取到关闭
+            !!this.$modal.find(".btn-ok") ? this.$modal.find('.btn-ok').focus() :  this.$modal.find('.close').focus();
         },
         hide: function () {
             var $modal = this.$modal;
